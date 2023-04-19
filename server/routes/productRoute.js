@@ -17,6 +17,16 @@ router.get('/slug/:slug', async (req, res) => {
         res.status(404).send({ message: 'Product Not Found' })
     }
 })
+router.get('/:id', async (req, res) => {
+    const product = await data.products.find(x => x._id === req.params.id)
+    if (product) {
+        console.log(product)
+        res.send(product)
+    }
+    else {
+        res.status(404).send({ message: 'Product Not Found' })
+    }
+})
 
 
 
