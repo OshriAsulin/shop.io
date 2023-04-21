@@ -25,14 +25,14 @@ const CartScreen = () => {
                             {cartItems.map((item) => (
                                 <ListGroup.Item key={item._id}>
                                     <Row className='align-items-center'>
-                                        <Col md={2}>
+                                        <Col md={4}>
                                             <img
                                                 src={item.image}
                                                 alt={item.name}
                                                 className='img-fluid rounded img-thumbnail'
                                             ></img>{' '}
+                                        <Link to={`/product/${item.slug}`}>{item.name}</Link>
                                         </Col>
-                                        <Col> <Link to={`/product/${item.slug}`}>{item.name}</Link></Col>
                                         <Col md={3}>
                                             <Button variant='light' disabled={item.quantity === 1}>
                                                 <i className='fas fa-minus-circle'></i>{' '}

@@ -89,6 +89,9 @@ body {
  position: relative;
  left: -400px;
 } */
+
+
+
 .site-container {
   min-height: 100vh;
 }
@@ -105,16 +108,16 @@ main {
   padding: 0.5rem;
 }
 
-.products {
+/* .products {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-}
+} */
 
 .rating span{
   color: #ffc000;
 }
-.product {
+/* .product {
   border: 1px #404040 solid;
   margin: 1rem;
 }
@@ -126,7 +129,7 @@ main {
 
 .product-info {
   padding: 1rem;
-}
+} */
 
 .img-large{
   max-width: 100%;
