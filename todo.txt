@@ -1,0 +1,6 @@
+1 change the style of buttons and hover them
+2 change the style of pages
+3 implement the validation of out of the stock
+4 create models and improve the backend 
+5 style the cart screen and how everyone is show
+
