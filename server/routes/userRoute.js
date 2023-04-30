@@ -48,7 +48,7 @@ router.post('/signin', async (req, res) => {
             return;
         }
     }
-    res.status(401).send({ message: 'invalid email or password' });
+    res.status(401).send({ message: 'Invalid email or password' });
 })
 
 const userRoute = router

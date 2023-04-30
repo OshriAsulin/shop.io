@@ -7,10 +7,10 @@ const router = express.Router()
 
 router.get('/', async (req, res) => {
     // await Product.removeAllListeners({});
-    // const createdProducts = await Product.insertMany(data.products)
+    const createdProducts = await Product.insertMany(data.products)
     // await User.removeAllListeners({});
-    const createdUsers = await User.insertMany(data.users)
-    res.send({ createdUsers})
+    // const createdUsers = await User.insertMany(data.users)
+    res.send({ createdProducts})
 })
 
 
