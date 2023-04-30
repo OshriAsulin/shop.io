@@ -6,7 +6,7 @@ import { Store } from '../Store'
 import axios from 'axios'
 
 const Product = (props) => {
-    const { product} = props
+    const { product } = props
     const { state, dispatch: ctxDispatch } = useContext(Store);
     const { cart: { cartItems } } = state;
 

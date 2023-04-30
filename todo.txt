@@ -3,4 +3,5 @@
 3 implement the validation of out of the stock
 4 create models and improve the backend 
 5 style the cart screen and how everyone is show
-
+6 add .env file to gitignore 
+7 fix the button out of stock when its out of stock
