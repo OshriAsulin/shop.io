@@ -11,21 +11,32 @@ router.get('/', async (req, res) => {
 
 
 router.post('/signup', async (req, res) => {
-    const currentUser = await User.findOne({ email: req.body.email })
-    if (currentUser) {
-        return res.send('user is exist in system with this email')
-    }
-    const newUser = new User({
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password,
-        isAdmin: req.body.isAdmin
-    })
     try {
-        await newUser.save()
-        console.log(newUser)
-        res.status(200)
-        res.send(newUser)
+        const currentUser = await User.findOne({ email: req.body.email })
+        if (currentUser) {
+            res.status(401).send({ message: 'have an account with this email' });
+        }
+        else {
+
+            const newUser = new User({
+                name: req.body.name,
+                email: req.body.email,
+                password: bcrypt.hashSync(req.body.password),
+            })
+            const user = await newUser.save()
+            res.status(200);
+            res.send({
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                isAdmin: user.isAdmin,
+                token: generateToken(user)
+            })
+            return;
+        }
+        //     console.log(newUser)
+        //     res.status(200)
+        //     res.send(newUser)
     } catch (err) {
         console.log(err)
         res.status(500).json({ err: err.message })
