@@ -11,7 +11,7 @@ const ShippingAddressScreen = () => {
     const { state, dispatch: ctxDispatch } = useContext(Store)
     const { userInfo, cart: { shippingAddress } } = state
 
-    const [fullname, setFullName] = useState(shippingAddress.fullname || '')
+    const [fullName, setFullName] = useState(shippingAddress.fullName || '')
     const [address, setAddress] = useState(shippingAddress.address || '')
     const [city, setCity] = useState(shippingAddress.city || '')
     const [postalCode, setPostalCode] = useState(shippingAddress.postalCode || '')
@@ -29,7 +29,7 @@ const ShippingAddressScreen = () => {
         ctxDispatch({
             type: 'SAVE_SHIPPING_ADDRESS',
             payload: {
-                fullname,
+                fullName,
                 address,
                 city,
                 postalCode,
@@ -40,7 +40,7 @@ const ShippingAddressScreen = () => {
         // the local storage is display just in string format
         localStorage.setItem('shippingAddress',
             JSON.stringify({
-                fullname,
+                fullName,
                 address,
                 city,
                 postalCode,
@@ -59,9 +59,9 @@ const ShippingAddressScreen = () => {
             <div className='container small-container'>
                 <h1 className='my-3'>Shipping Address</h1>
                 <Form onSubmit={submitHandler}>
-                    <Form.Group className='mb-3' controlId='fullname'>
+                    <Form.Group className='mb-3' controlId='fullName'>
                         <Form.Label>Full Name</Form.Label>
-                        <Form.Control value={fullname} onChange={(e) => setFullName(e.target.value)} required />
+                        <Form.Control value={fullName} onChange={(e) => setFullName(e.target.value)} required />
                     </Form.Group>
                     <Form.Group className='mb-3' controlId='address'>
                         <Form.Label>Address</Form.Label>

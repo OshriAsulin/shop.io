@@ -139,6 +139,11 @@ main {
   height: 80px;
 }
 
+.imgProduct{
+  width: 80px;
+border:1px solid rgb(218, 217, 217);
+border-radius: 10px;
+}
 .small-container {
   max-width: 600px;
 }

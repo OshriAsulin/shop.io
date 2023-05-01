@@ -5,3 +5,4 @@
 5 style the cart screen and how everyone is show
 6 add .env file to gitignore 
 7 fix the button out of stock when its out of stock
+8 implement minus product in database when user make an order
