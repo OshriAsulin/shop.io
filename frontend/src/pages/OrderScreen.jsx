@@ -23,7 +23,7 @@ function reducer(state, action) {
         case 'PAY_SUCCESS':
             return { ...state, loadingPay: false, successPay: true };
         case 'PAY_FAIL':
-            return { ...state, loadingPay: false };
+            return { ...state, loadingPay: false};
         case 'PAY_RESET':
             return { ...state, loadingPay: false, successPay: false };
         //   case 'DELIVER_REQUEST':
@@ -154,7 +154,7 @@ const OrderScreen = () => {
             error ? (<MessageBox variant="danger">{error}</MessageBox>) :
                 <div>
                     <Helmet>
-                        <title>Order {orderId}</title>
+                        <title> Order {orderId}</title>
                     </Helmet>
                     <h1 className="my-3">Order {orderId}</h1>
                     <Row>
@@ -277,7 +277,7 @@ const OrderScreen = () => {
                                                 {loadingPay && <LoadingBox></LoadingBox>}
                                             </ListGroup.Item>
                                         )}
-                                        {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                                        {/* {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
                                             <ListGroup.Item>
                                                 {loadingDeliver && <LoadingBox></LoadingBox>}
                                                 <div className="d-grid">
@@ -286,7 +286,7 @@ const OrderScreen = () => {
                                                     </Button>
                                                 </div>
                                             </ListGroup.Item>
-                                        )}
+                                        )} */}
                                     </ListGroup>
                                 </Card.Body>
                             </Card>

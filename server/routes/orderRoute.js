@@ -6,6 +6,20 @@ import expressAsyncHandler from 'express-async-handler';
 
 const router = express.Router()
 
+
+router.get('/mine', isAuth, expressAsyncHandler(async (req, res) => {
+    try {
+        const orders = await Order.find({ user: req.user._id})
+        res.status(200).send(orders)
+    } catch (err) {
+        res.status(404).send({message: message.err})
+        console.log(err)
+    }
+}))
+
+
+
+
 router.get('/:id', isAuth, expressAsyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id);
     if (order) {
@@ -42,6 +56,9 @@ router.post('/',
     ))
 
 
+
+  
+
 router.put('/:id/pay', isAuth, expressAsyncHandler(async (req, res) => {
     try {
         const order = await Order.findById(req.params.id);
@@ -64,6 +81,8 @@ router.put('/:id/pay', isAuth, expressAsyncHandler(async (req, res) => {
         console.log(err)
     }
 }))
+
+
 
 const orderRoute = router
 export default orderRoute
