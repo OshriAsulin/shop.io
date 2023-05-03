@@ -19,6 +19,7 @@ const SigninScreen = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState(false)
+
     const submitHandler = async (e) => {
         console.log(e)
         e.preventDefault();
@@ -29,6 +30,7 @@ const SigninScreen = () => {
             ctxDispatch({ type: 'USER_SIGNIN', payload: data })
             localStorage.setItem('userInfo', JSON.stringify(data))
             navigate(redirect || '/')
+            toast.success('User signin successfully');
             // console.log(data)
         } catch (err) {
             toast.error(getError(err))

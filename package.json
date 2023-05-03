@@ -1,0 +1,21 @@
+{
+  "name": "shop.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build" : "cd server && npm install && cd ../frontend && npm install && npm run build",
+    "start": "node server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OshriAsulin/proj.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OshriAsulin/proj/issues"
+  },
+  "homepage": "https://github.com/OshriAsulin/proj#readme"
+}

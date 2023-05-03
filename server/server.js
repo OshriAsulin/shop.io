@@ -26,11 +26,11 @@ app.use('/api/seed', seedRoute)
 app.use('/api/users', userRoute)
 app.use('/api/orders', orderRoute)
 
-// const _dirname = path.resolve();
-// app.use(express.static(path.join(_dirname, '/frontend/build')))
-// app.get('*', (req, res)=>{
-//     res.sendFile(path.join(_dirname, '/frontend/build/index.html'))
-// })
+const _dirname = path.resolve();
+app.use(express.static(path.join(_dirname, '/frontend/dist')))
+app.get('*', (req, res)=>{
+    res.sendFile(path.join(_dirname, '/frontend/dist/index.html'))
+})
 
 
 
