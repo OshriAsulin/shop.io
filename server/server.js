@@ -7,6 +7,7 @@ import dotenv from 'dotenv'
 import userRoute from "./routes/userRoute.js";
 import bodyParser from "body-parser";
 import orderRoute from "./routes/orderRoute.js";
+import path from "path";
 dotenv.config();
 const app = express();
 
@@ -25,12 +26,20 @@ app.use('/api/seed', seedRoute)
 app.use('/api/users', userRoute)
 app.use('/api/orders', orderRoute)
 
+// const _dirname = path.resolve();
+// app.use(express.static(path.join(_dirname, '/frontend/build')))
+// app.get('*', (req, res)=>{
+//     res.sendFile(path.join(_dirname, '/frontend/build/index.html'))
+// })
+
+
+
 
 mongoose.connect(process.env.MONGODB_CONNECTION)
     .then(() => {
         console.log('connect to mongoDB')
 
-        app.listen(process.env.PORT, () => {
+        app.listen(process.env.PORT || 8080, () => {
             console.log('server is running in port 8080')
         })
 
