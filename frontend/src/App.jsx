@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
 import { Link, Route, Routes } from 'react-router-dom'
 import HomeScreen from './pages/HomeScreen'
 import ProductScreen from './pages/ProductScreen'
@@ -19,6 +18,9 @@ import PlaceOrderScreen from './pages/PlaceOrderScreen'
 import OrderScreen from './pages/OrderScreen'
 import OrderHistoryScreen from './pages/OrderHistoryScreen'
 import ProfileScreen from './pages/ProfileScreen'
+import ProtectedRoute from './components/ProtectedRoute'
+import AdminRoute from './components/AdminRoute'
+import AdminDashboardScreen from './pages/AdminDashboardScreen'
 
 function App() {
 
@@ -74,6 +76,22 @@ function App() {
                     Sign In
                   </Link>
                 )}
+                {userInfo && userInfo.isAdmin && (
+                    <NavDropdown title="Admin" id="admin-nav-dropdown">
+                      <LinkContainer to="/admin/dashboard">
+                        <NavDropdown.Item>Dashboard</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/admin/products">
+                        <NavDropdown.Item>Products</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/admin/orders">
+                        <NavDropdown.Item>Orders</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/admin/users">
+                        <NavDropdown.Item>Users</NavDropdown.Item>
+                      </LinkContainer>
+                    </NavDropdown>
+                  )}
               </Nav>
               </Navbar.Collapse>
             </Container>
@@ -83,16 +101,19 @@ function App() {
           <Container className='mt-3'>
             <Routes>
               <Route path='/product/:slug' element={<ProductScreen />} />
-              <Route path='/' element={<HomeScreen />} />
               <Route path='/cart' element={<CartScreen />} />
               <Route path='/signin' element={<SigninScreen />} />
               <Route path='/signup' element={<SignupScreen />} />
-              <Route path='/profile' element={<ProfileScreen />} />
+              <Route path='/profile' element={ <ProtectedRoute><ProfileScreen /></ProtectedRoute> } />
               <Route path='/shipping' element={<ShippingAddressScreen />} />
               <Route path='/payment' element={<PaymentMethodScreen />} />
               <Route path='/placeorder' element={<PlaceOrderScreen />} />
-              <Route path='/order/:id' element={<OrderScreen />} />
-              <Route path='/orderhistory' element={<OrderHistoryScreen />} />
+              <Route path='/order/:id' element={<ProtectedRoute><OrderScreen /></ProtectedRoute>} />
+              <Route path='/orderhistory' element={<ProtectedRoute><OrderHistoryScreen /></ProtectedRoute> } />
+              {/**admin routes */}
+              <Route path='/admin/dashboard' element={<AdminRoute><AdminDashboardScreen/></AdminRoute>} />
+
+              <Route path='/' element={<HomeScreen />} />
             </Routes>
           </Container>
         </main>

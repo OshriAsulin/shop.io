@@ -81,9 +81,9 @@ const ShippingAddressScreen = () => {
                     </Form.Group>
                     {/* mb- margin bottom */}
                     <div className='mb-3'>
-                        <Button type='submit'>
+                        <button type='submit'>
                             Continue
-                        </Button>
+                        </button>
                     </div>
                 </Form>
             </div>

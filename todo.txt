@@ -8,3 +8,9 @@
 8 implement minus product in database when user make an order
 9 define in sign out function navigate to home screen 
 10 implement a btn for see the password that the user can see the password when is create her pass word
+11 add summary order after the payment is success
+12 set image size in product component and in product screen 
+13 add design alert for message 
+14 add the search box in navbr
+
+15 in the next time implement all admin panels 

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Button, Card } from 'react-bootstrap'
+import {  Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import Rating from './Rating'
 import { Store } from '../Store'
@@ -25,7 +25,7 @@ const Product = (props) => {
         })
     }
     return (
-        <Card >
+        <Card className='product'>
             <Link to={`/product/${product.slug}`}>
                 <img src={product.image} className='card-img-top' alt={product.name} />
             </Link>
@@ -36,8 +36,10 @@ const Product = (props) => {
                 <Rating rating={product.rating} numReviews={product.numReviews} />
                 <Card.Text>${product.price}</Card.Text>
                 {product.countInStock === 0 ?
-                    (<Button variant='light' disabled>Out of stock</Button>) :
-                    (<Button onClick={() => addToCartHandler(product)}>Add to cart</Button>)}
+                    (<button  variant='light' disabled>Out of stock</button>) :
+                    (<button className='btn' onClick={() => addToCartHandler(product)}>Add to cart</button>)}
+                    <br/>
+                    {/* <Button>test</Button> */}
             </Card.Body>
         </Card>
     )
