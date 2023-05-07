@@ -14,3 +14,5 @@
 14 add the search box in navbr
 
 15 in the next time implement all admin panels 
+16 add swiper images to home page
+17 add READ.me file 

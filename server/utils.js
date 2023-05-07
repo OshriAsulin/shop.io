@@ -1,4 +1,6 @@
 import jwt from "jsonwebtoken"
+import mailgun from 'mailgun-js';
+
 
 export const generateToken = (user) => {
     return jwt.sign(
@@ -29,3 +31,18 @@ export const isAuth = (req, res, next) => {
     }
 
 }
+
+
+
+
+export const baseUrl = () =>
+    process.env.BASE_URL ? process.env.BASE_URL : process.env.NODE_ENV !== 'production'
+        ? 'http://localhost:5173'
+        : 'https://shop-io-app.onrender.com';
+
+
+
+export const mg = mailgun({ apiKey: `${process.env.MAILGUN_API_KEY}` , domain: process.env.MAILGUN_DOMIAN });
+
+
+

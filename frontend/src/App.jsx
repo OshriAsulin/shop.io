@@ -21,6 +21,9 @@ import ProfileScreen from './pages/ProfileScreen'
 import ProtectedRoute from './components/ProtectedRoute'
 import AdminRoute from './components/AdminRoute'
 import AdminDashboardScreen from './pages/AdminDashboardScreen'
+import AboutScreen from './pages/AboutScreen'
+import ForgetPasswordScreen from './pages/ForgetPasswordScreen'
+import ResetPasswordScreen from './pages/ResetPasswordScreen'
 
 function App() {
 
@@ -41,42 +44,48 @@ function App() {
         <ToastContainer position='bottom-center' limit={1} />
         <header>
           <Navbar bg="dark" variant='dark' expand="lg">
+            {/* {this container set the position of thlinks and the name of the site} */}
             <Container>
-              <LinkContainer to='/'>
-                <Navbar.Brand>Shop.io</Navbar.Brand>
-              </LinkContainer>
+              {/* <LinkContainer to='/'> */}
+              {/* <Navbar.Brand></Navbar.Brand> */}
+              {/* <a>Shop.io</a> */}
+              {/* </LinkContainer> */}
+              <div>
+                <Link className='app-title' to='/'>Shop.io</Link>
+              </div>
               <Navbar.Toggle aria-controls='basic-navbar-nav'></Navbar.Toggle>
               <Navbar.Collapse id='basic-navbar-nav'>
-              <Nav className='me-auto w-100 justify-content-end'>
-                <Link to='/cart' className='nav-link'>
-                  Cart
-                  {cart.cartItems.length > 0 && (
-                    <Badge pill bg="danger">
-                      {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
-                    </Badge>
-                  )}
-                </Link>
-                {userInfo ? (
-                  <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
-                    <LinkContainer to="/profile">
-                      <NavDropdown.Item>User Profile</NavDropdown.Item>
-                    </LinkContainer>
-                    <LinkContainer to="/orderhistory">
-                      <NavDropdown.Item>Order History</NavDropdown.Item>
-                    </LinkContainer>
-                    <NavDropdown.Divider />
-                    <Link
-                      className="dropdown-item"
-                      to="#signout"
-                      onClick={signoutHandler}
-                    >Sign Out</Link>
-                  </NavDropdown>
-                ) : (
-                  <Link className='nav-link' to="/signin">
-                    Sign In
+                <Nav className='me-auto w-100 justify-content-end'>
+                  <Link className='nav-link' to="/about">About</Link>
+                  <Link to='/cart' className='nav-link'>
+                    Cart
+                    {cart.cartItems.length > 0 && (
+                      <Badge pill bg="danger">
+                        {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                      </Badge>
+                    )}
                   </Link>
-                )}
-                {userInfo && userInfo.isAdmin && (
+                  {userInfo ? (
+                    <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
+                      <LinkContainer to="/profile">
+                        <NavDropdown.Item>User Profile</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/orderhistory">
+                        <NavDropdown.Item>Order History</NavDropdown.Item>
+                      </LinkContainer>
+                      <NavDropdown.Divider />
+                      <Link
+                        className="dropdown-item"
+                        to="#signout"
+                        onClick={signoutHandler}
+                      >Sign Out</Link>
+                    </NavDropdown>
+                  ) : (
+                    <Link className='nav-link' to="/signin">
+                      Sign In
+                    </Link>
+                  )}
+                  {userInfo && userInfo.isAdmin && (
                     <NavDropdown title="Admin" id="admin-nav-dropdown">
                       <LinkContainer to="/admin/dashboard">
                         <NavDropdown.Item>Dashboard</NavDropdown.Item>
@@ -92,7 +101,7 @@ function App() {
                       </LinkContainer>
                     </NavDropdown>
                   )}
-              </Nav>
+                </Nav>
               </Navbar.Collapse>
             </Container>
           </Navbar>
@@ -102,16 +111,19 @@ function App() {
             <Routes>
               <Route path='/product/:slug' element={<ProductScreen />} />
               <Route path='/cart' element={<CartScreen />} />
+              <Route path='/about' element={<AboutScreen />} />
               <Route path='/signin' element={<SigninScreen />} />
               <Route path='/signup' element={<SignupScreen />} />
-              <Route path='/profile' element={ <ProtectedRoute><ProfileScreen /></ProtectedRoute> } />
+              <Route path='/profile' element={<ProtectedRoute><ProfileScreen /></ProtectedRoute>} />
               <Route path='/shipping' element={<ShippingAddressScreen />} />
               <Route path='/payment' element={<PaymentMethodScreen />} />
               <Route path='/placeorder' element={<PlaceOrderScreen />} />
+              <Route path='/forget-password' element={<ForgetPasswordScreen />} />
+              <Route path='/reset-password/:token' element={<ResetPasswordScreen />} />
               <Route path='/order/:id' element={<ProtectedRoute><OrderScreen /></ProtectedRoute>} />
-              <Route path='/orderhistory' element={<ProtectedRoute><OrderHistoryScreen /></ProtectedRoute> } />
+              <Route path='/orderhistory' element={<ProtectedRoute><OrderHistoryScreen /></ProtectedRoute>} />
               {/**admin routes */}
-              <Route path='/admin/dashboard' element={<AdminRoute><AdminDashboardScreen/></AdminRoute>} />
+              <Route path='/admin/dashboard' element={<AdminRoute><AdminDashboardScreen /></AdminRoute>} />
 
               <Route path='/' element={<HomeScreen />} />
             </Routes>

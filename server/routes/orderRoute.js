@@ -2,6 +2,7 @@ import express from 'express'
 import Order from '../models/orderModel.js'
 import { isAuth } from '../utils.js'
 import expressAsyncHandler from 'express-async-handler';
+import { getProductById } from '../controllers/orderController.js';
 
 
 const router = express.Router()
@@ -9,30 +10,31 @@ const router = express.Router()
 
 router.get('/mine', isAuth, expressAsyncHandler(async (req, res) => {
     try {
-        const orders = await Order.find({ user: req.user._id})
+        const orders = await Order.find({ user: req.user._id })
         res.status(200).send(orders)
     } catch (err) {
-        res.status(404).send({message: message.err})
+        res.status(404).send({ message: message.err })
         console.log(err)
     }
 }))
 
 
+//the same function but in two diffrent ways 
+
+router.get('/:id', isAuth, expressAsyncHandler(getProductById))
+
+// router.get('/:id', isAuth, expressAsyncHandler(async (req, res) => {
+//     const order = await Order.findById(req.params.id);
+//     if (order) {
+//         res.status(200);
+//         res.send(order)
+//     } else {
+//         res.status(404).send({ message: 'Order not found' });
+//     }
+// }))
 
 
-router.get('/:id', isAuth, expressAsyncHandler(async (req, res) => {
-    const order = await Order.findById(req.params.id);
-    if (order) {
-        res.status(200);
-        res.send(order)
-    } else {
-        res.status(404).send({ message: 'Order not found' });
-    }
-}))
-
-
-router.post('/',
-    isAuth,
+router.post('/', isAuth,
     expressAsyncHandler(async (req, res) => {
         try {
 
@@ -57,7 +59,7 @@ router.post('/',
 
 
 
-  
+
 
 router.put('/:id/pay', isAuth, expressAsyncHandler(async (req, res) => {
     try {
