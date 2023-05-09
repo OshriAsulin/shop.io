@@ -55,7 +55,7 @@ export const sendEmail = (userMail, resetToken) => {
         });
 
         const mailOptions = {
-            from: EMAIL,
+            from: process.env.EMAIL,
             to: userMail,
             subject: "Shop.io Reset password",
             html: `<h1>Congratulation</h1> <h2> You successfully sent Email </h2>

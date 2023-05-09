@@ -46,7 +46,6 @@ export async function updateUserDetails(req, res) {
 export async function forgetPassword(req, res) {
     try {
         const user = await User.findOne({ email: req.body.email })
-
         if (user) {
             const resetToken = crypto.randomBytes(32).toString('hex');
             const passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
