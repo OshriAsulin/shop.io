@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken"
-import mailgun from 'mailgun-js';
+import nodemailer from "nodemailer";
 
 
 export const generateToken = (user) => {
@@ -36,13 +36,46 @@ export const isAuth = (req, res, next) => {
 
 
 export const baseUrl = () =>
-    process.env.BASE_URL ? process.env.BASE_URL : process.env.NODE_ENV !== 'production'
-        ? 'http://localhost:5173'
-        : 'https://shop-io-app.onrender.com';
+    process.env.BASE_URL ?
+        process.env.BASE_URL : process.env.NODE_ENV !== 'production'
+            ? 'http://localhost:5173'
+            : 'https://shop-io-app.onrender.com';
 
 
 
-export const mg = mailgun({ apiKey: `${process.env.MAILGUN_API_KEY}` , domain: process.env.MAILGUN_DOMIAN });
+export const sendEmail = (userMail, resetToken) => {
+    try {
 
+        const transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: process.env.EMAIL,
+                pass: process.env.PWD_EMAIL
+            }
+        });
 
+        const mailOptions = {
+            from: EMAIL,
+            to: userMail,
+            subject: "Shop.io Reset password",
+            html: `<h1>Congratulation</h1> <h2> You successfully sent Email </h2>
+                         <a href="${baseUrl()}/reset-password/${resetToken}">Reset Password</a>`
+        };
 
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.log("Error" + error)
+            } else {
+                console.log("Email sent:" + info.response);
+                res.status(201).json({ status: 201, info, message: 'We sent reset password link to your email.' })
+            }
+        })
+
+        return;
+    } catch (error) {
+        console.log("Error" + error);
+        res.status(401).json({ status: 401, error })
+
+        return;
+    }
+}

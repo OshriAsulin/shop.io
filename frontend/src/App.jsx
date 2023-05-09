@@ -24,7 +24,9 @@ import AdminDashboardScreen from './pages/AdminDashboardScreen'
 import AboutScreen from './pages/AboutScreen'
 import ForgetPasswordScreen from './pages/ForgetPasswordScreen'
 import ResetPasswordScreen from './pages/ResetPasswordScreen'
-
+import AdminProductsScreen from './pages/AdminProductsScreen'
+import AdminOrdersScreen from './pages/AdminOrdersScreen'
+import AdminUsersScreen from './pages/AdminUsersScreen'
 function App() {
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -119,11 +121,14 @@ function App() {
               <Route path='/payment' element={<PaymentMethodScreen />} />
               <Route path='/placeorder' element={<PlaceOrderScreen />} />
               <Route path='/forget-password' element={<ForgetPasswordScreen />} />
-              <Route path='/reset-password/:token' element={<ResetPasswordScreen />} />
+              <Route path='/reset-password/:token' element={<ResetPasswordScreen/>} />
               <Route path='/order/:id' element={<ProtectedRoute><OrderScreen /></ProtectedRoute>} />
               <Route path='/orderhistory' element={<ProtectedRoute><OrderHistoryScreen /></ProtectedRoute>} />
               {/**admin routes */}
               <Route path='/admin/dashboard' element={<AdminRoute><AdminDashboardScreen /></AdminRoute>} />
+              <Route path='/admin/products' element={<AdminRoute><AdminProductsScreen /></AdminRoute>} />
+              <Route path='/admin/orders' element={<AdminRoute><AdminOrdersScreen /></AdminRoute>} />
+              <Route path='/admin/users' element={<AdminRoute><AdminUsersScreen /></AdminRoute>} />
 
               <Route path='/' element={<HomeScreen />} />
             </Routes>

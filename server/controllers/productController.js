@@ -12,23 +12,33 @@ export async function getAllProducts(req, res) {
 }
 
 export async function getProductById(req, res) {
-    const product = await Product.findById(req.params.id)
-    if (product) {
-        console.log(product)
-        res.send(product)
-    }
-    else {
-        res.status(404).send({ message: 'Product Not Found' })
+    try {
+        const product = await Product.findById(req.params.id)
+        if (product) {
+            // console.log(product)
+            res.send(product)
+        }
+        else {
+            res.status(404).send({ message: 'Product Not Found' })
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ err: error.message })
     }
 }
 
 export async function getProductBySlug(req, res) {
-    const product = await Product.findOne({ slug: req.params.slug })
-    if (product) {
-        console.log(product)
-        res.send(product)
-    }
-    else {
-        res.status(404).send({ message: 'Product Not Found' })
+    try {
+        const product = await Product.findOne({ slug: req.params.slug })
+        if (product) {
+            // console.log(product)
+            res.status(200).send(product)
+        }
+        else {
+            res.status(404).send({ message: 'Product Not Found' })
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ err: error.message })
     }
 }

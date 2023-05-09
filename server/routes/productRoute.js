@@ -5,11 +5,11 @@ import Product from "../models/productModel.js";
 const router = express.Router()
 
 
-router.get('/', getAllProducts)
+router.get('/', getAllProducts);
 
-router.get('/slug/:slug', getProductBySlug)
+router.get('/:id',getProductById);
 
-router.get('/:id',getProductById)
+router.get('/slug/:slug', getProductBySlug);
 
 
 
