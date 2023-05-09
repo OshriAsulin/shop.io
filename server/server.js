@@ -8,6 +8,7 @@ import userRoute from "./routes/userRoute.js";
 import bodyParser from "body-parser";
 import orderRoute from "./routes/orderRoute.js";
 import path from "path";
+import adminRoute from "./routes/adminRoute.js";
 dotenv.config();
 const app = express();
 
@@ -25,6 +26,7 @@ app.use('/api/products', producteRoute)
 app.use('/api/seed', seedRoute)
 app.use('/api/users', userRoute)
 app.use('/api/orders', orderRoute)
+app.use('/api/admin', adminRoute)
 
 
 

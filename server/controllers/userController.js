@@ -4,14 +4,6 @@ import { baseUrl, generateToken, sendEmail } from '../utils.js';
 import crypto from 'crypto'
 
 
-export async function getAllUsers(req, res) {
-    try {
-        const users = await User.find();
-        res.status(200).send(users)
-    } catch (err) {
-        res.status(500).json({ message: "error from send the users" })
-    }
-}
 
 export async function updateUserDetails(req, res) {
     try {
