@@ -11,7 +11,7 @@ router.get('/mine', isAuth, expressAsyncHandler(getOrderByUser));
 
 router.get('/:id', isAuth, expressAsyncHandler(getOrderById));
 
-router.post('/', isAuth,expressAsyncHandler(newOrder));
+router.post('/', isAuth, expressAsyncHandler(newOrder));
 
 router.put('/:id/pay', isAuth, expressAsyncHandler(payOrder));
 

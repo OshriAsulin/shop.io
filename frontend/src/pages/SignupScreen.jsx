@@ -75,7 +75,7 @@ const SignupScreen = () => {
                 </Form.Group>
                 {/* {errorMessage && <div style={{ color: 'red' }}> error</div>} */}
                 <div className='mb-3'>
-                    <Button type='submit'>Sign Up</Button>
+                    <button type='submit'>Sign Up</button>
                 </div>
             </Form>
             <div className='mb-3'>

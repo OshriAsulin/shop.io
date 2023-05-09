@@ -9,7 +9,6 @@ import { getError } from '../utils';
 import { Card, Col, ListGroup, Row } from 'react-bootstrap';
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import { toast } from 'react-toastify';
-
 function reducer(state, action) {
     switch (action.type) {
         case 'FETCH_REQUEST':
@@ -23,7 +22,7 @@ function reducer(state, action) {
         case 'PAY_SUCCESS':
             return { ...state, loadingPay: false, successPay: true };
         case 'PAY_FAIL':
-            return { ...state, loadingPay: false};
+            return { ...state, loadingPay: false };
         case 'PAY_RESET':
             return { ...state, loadingPay: false, successPay: false };
         //   case 'DELIVER_REQUEST':
@@ -47,8 +46,8 @@ function reducer(state, action) {
 const OrderScreen = () => {
 
     const { state } = useContext(Store);
-    const { userInfo } = state;
-
+    const { userInfo, cart: { paymentMethod } } = state;
+    console.log(paymentMethod)
     const navigate = useNavigate();
     const params = useParams();
     const { id: orderId } = params;
@@ -115,9 +114,9 @@ const OrderScreen = () => {
         if (!userInfo) {
             return navigate('/login');
         }
-        
+
         // || successDeliver 
-        if (!order._id  || successPay || (order._id && order._id !== orderId))  {
+        if (!order._id || successPay || (order._id && order._id !== orderId)) {
             fetchOrder();
             if (successPay) {
                 dispatch({ type: 'PAY_RESET' });
@@ -147,6 +146,9 @@ const OrderScreen = () => {
     ]);
 
 
+    const stripeScreen = () => {
+        navigate('/stripeScreen')
+    }
     return (
 
         loading ?
@@ -263,20 +265,20 @@ const OrderScreen = () => {
                                         </ListGroup.Item>
                                         {!order.isPaid && (
                                             <ListGroup.Item>
-                                                {isPending ? (
-                                                    <LoadingBox />
-                                                ) : (
-                                                    <div>
-                                                        <PayPalButtons
-                                                            createOrder={createOrder}
-                                                            onApprove={onApprove}
-                                                            onError={onError}
-                                                        ></PayPalButtons>
-                                                    </div>
-                                                )}
+                                                {isPending ? (<LoadingBox />)
+                                                    : (
+                                                        <div>
+                                                            <PayPalButtons
+                                                                createOrder={createOrder}
+                                                                onApprove={onApprove}
+                                                                onError={onError}
+                                                            ></PayPalButtons>
+                                                        </div>
+                                                    )}
                                                 {loadingPay && <LoadingBox></LoadingBox>}
                                             </ListGroup.Item>
                                         )}
+                                        {/* <button className='stripe-btn'>Pay Stripe</button> */}
                                         {/* {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
                                             <ListGroup.Item>
                                                 {loadingDeliver && <LoadingBox></LoadingBox>}

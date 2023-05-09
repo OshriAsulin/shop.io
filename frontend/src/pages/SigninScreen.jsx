@@ -18,7 +18,6 @@ const SigninScreen = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState(false)
 
     const submitHandler = async (e) => {
         console.log(e)
@@ -34,7 +33,6 @@ const SigninScreen = () => {
             // console.log(data)
         } catch (err) {
             toast.error(getError(err))
-            // setErrorMessage(true)
         }
     }
 
@@ -60,9 +58,8 @@ const SigninScreen = () => {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type='password' required onChange={(e) => setPassword(e.target.value)} />
                 </Form.Group>
-                {errorMessage && <div style={{ color: 'red' }}> error</div>}
                 <div className='mb-3'>
-                    <Button type='submit'>Sign In</Button>
+                    <button type='submit'>Sign In</button>
                 </div>
             </Form>
             <div className='mb-3'>

@@ -58,7 +58,7 @@ const PaymentMethodScreen = () => {
                         ></Form.Check>
                     </div>
                     <div className='mb-3'>
-                        <Button type='submit'>Continue</Button>
+                        <button type='submit'>Continue</button>
                     </div>
                 </Form>
 
