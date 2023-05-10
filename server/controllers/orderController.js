@@ -1,5 +1,6 @@
 import Order from "../models/orderModel.js";
 
+
 export async function getOrderByUser(req, res) {
     try {
         const orders = await Order.find({ user: req.user._id })
@@ -70,3 +71,8 @@ export async function payOrder(req, res) {
 
     }
 }
+
+
+
+
+

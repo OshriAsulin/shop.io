@@ -1,9 +1,9 @@
-1 change the style of buttons and hover them
+1 change the style of buttons and hover them V
 
-2 change the style of pages
+2 change the style of pages V
 3 implement the validation of out of the stock
-4 create models and improve the backend 
-5 style the cart screen and how everyone is show
+4 create models and improve the backend V
+5 style the cart screen and how everyone is show V
 6 add .env file to gitignore V
 7 fix the button out of stock when its out of stock
 8 implement minus product in database when user make an order
@@ -22,3 +22,10 @@
 
 // add isAdmin validation 
 // add all functions of admin 
+
+
+
+add the search box in navbr
+LIST IMAGES
+ADD PRODUCTS 
+ADD FILTER PRODUCTS 

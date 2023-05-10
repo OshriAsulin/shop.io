@@ -9,6 +9,7 @@ import LoadingBox from '../components/LoadingBox';
 import { getError } from '../utils';
 import { toast } from 'react-toastify'
 
+
 const reducer = (state, action) => {
   switch (action.type) {
     case 'FETCH_REQUEST':
@@ -88,10 +89,10 @@ const AdminUsersScreen = () => {
 
   const deleteHandler = async (user) => {
     console.log(user._id)
-    // if (window.confirm('Are you sure to delete?')) {
+    if (window.confirm('Are you sure to delete?')) {
       try {
         dispatch({ type: "DELETE_REQUEST" })
-         await axios.delete(`/api/admin/${user._id}`, {
+        await axios.delete(`/api/admin/${user._id}`, {
           headers: { Authorization: `Bearer ${userInfo.token}` }
         })
         // console.log(data)
@@ -101,8 +102,18 @@ const AdminUsersScreen = () => {
         toast.error(getError(error));
         dispatch({ type: 'DELETE_FAIL' });
       }
-    // }
+    }
   }
+
+
+
+//   const [open, setOpen] = useState(false)
+//   const openUpload = () => {
+//     setOpen(!open)
+//   }
+//  {open && <Upload setOpen={setOpen} />}
+
+
   return (
     <div>
       <Helmet>
@@ -137,11 +148,12 @@ const AdminUsersScreen = () => {
                   <Button
                     type="button"
                     variant="light"
-                    onClick={() => navigate(`/admin/user/${user._id}`)}
+                    // onClick={() => navigate(`/admin/user/${user._id}`)}
+                    // onClick={openUpload}
                   >
                     Edit
                   </Button>
-                  {/* &nbsp; */}
+                  &nbsp;
                   <Button
                     type="button"
                     variant="danger"
@@ -155,6 +167,7 @@ const AdminUsersScreen = () => {
           </tbody>
         </table>
       )}
+      {/* {open && <Upload setOpen={setOpen} />} */}
     </div>
   )
 }
