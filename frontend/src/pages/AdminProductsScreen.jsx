@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useReducer, useState } from 'react'
 import { getError } from '../utils';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Store } from '../Store';
-import { Button, Col, Row } from 'react-bootstrap';
+import { Button, Col, Row, Table } from 'react-bootstrap';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import axios from 'axios';
@@ -166,7 +166,7 @@ const AdminProductsScreen = () => {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-          <table className="table">
+          <Table responsive className="table">
             <thead>
               <tr>
                 <th>ID</th>
@@ -205,7 +205,7 @@ const AdminProductsScreen = () => {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </Table>
           <div>
             {[...Array(pages).keys()].map((x) => (
               <Link

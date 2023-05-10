@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useState } from 'react'
 import style from '../styles/UploadStyles.module.css'
-import { Form } from 'react-bootstrap'
+import { Button, Form } from 'react-bootstrap'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
@@ -108,7 +108,7 @@ const UploadProduct = ({ setOpen, userInfo }) => {
                         <Form.Label></Form.Label>
                         <Form.Control type='Number' placeholder='Count In Stock' value={countInStock} required onChange={(e) => setCountInStock(e.target.value)} />
                     </Form.Group>
-                    <button className={style.sendButton}>Add</button>
+                    <Button className={style.sendButton}>Add</Button>
                 </Form>
 
             </div>

@@ -156,6 +156,8 @@ export async function addProduct(req, res) {
     }
 }
 
+
+// implement this method with frontend
 export async function updateProduct(req, res) {
     try {
         // const currentProduct = req.body.params
@@ -183,3 +185,17 @@ export async function updateProduct(req, res) {
     }
 }
 
+// implement this method
+export async function setUserAdmin(req, res) {
+    console.log(req.body.isAdmin)
+    try {
+        const user = await User.findOne({ _id: req.params.id })
+        console.log('check',user)
+        user.isAdmin = req.body.isAdmin
+        await user.save()
+        res.status(200).send(user)
+
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}

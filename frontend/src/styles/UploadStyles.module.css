@@ -13,15 +13,18 @@
 .wrapperContainer {
     width: 600px;
     height: 800px;
-    background-color: aqua;
-    color: rgb(15, 103, 179);
+    background-color: rgba(6, 14, 30, 0.971);
+    color: rgb(213, 225, 236);
     padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 20px;
     position: relative;
+    text-align: center;
 }
+.wrapperContainer  .sendButton{
 
+}
 .close {
     position: absolute;
     top: 10px;
@@ -49,7 +52,12 @@
 .label {
     font-size: 14px;
 } */
+
 .sendButton{
-    display: flex;
-    justify-content: center;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    border-radius: 10px;
+    background-color: darkseagreen;
+    /* padding: 0.5rem 4px 0.5rem 2rem ; */
 }

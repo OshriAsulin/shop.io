@@ -1,7 +1,7 @@
 import express from "express";
 import User from "../models/userModel.js";
 import { isAdmin, isAuth } from "../utils.js";
-import {  addProduct, deleteProduct, deleteUser, getAllUsers, getProducts, getUser, summaryOrders, updateProduct } from "../controllers/adminController.js";
+import {  addProduct, deleteProduct, deleteUser, getAllUsers, getProducts, getUser, setUserAdmin, summaryOrders, updateProduct } from "../controllers/adminController.js";
 
 const router = express.Router()
 
@@ -25,7 +25,10 @@ router.get("/:id", isAuth, isAdmin, getUser);
 router.post("/addProduct", isAuth, isAdmin, addProduct)
 
 // implement this in frontend 
-router.put("/addProduct", isAuth, isAdmin, updateProduct)
+router.put("/updateProduct", isAuth, isAdmin, updateProduct)
+
+// set user to admin
+router.put("/setUser/:id", isAuth, isAdmin, setUserAdmin)
 
 
 
