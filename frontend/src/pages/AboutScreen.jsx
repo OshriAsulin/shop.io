@@ -5,8 +5,8 @@ import Images from '../components/Images'
 const AboutScreen = () => {
   return (
     // <ImagesSlides/>
-    // <Images/>
-    <div>AboutScreen</div>
+    <Images/>
+    // <div>AboutScreen</div>
   )
 }
 

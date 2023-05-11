@@ -10,6 +10,7 @@ import { toast } from 'react-toastify'
 import UploadProduct from '../components/UploadProduct';
 import { Helmet } from 'react-helmet-async';
 import EditProduct from '../components/EditProduct';
+import Swal from 'sweetalert2'
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -99,23 +100,55 @@ const AdminProductsScreen = () => {
     setSelectedProduct(product);
   }
 
+  // Swal.fire({
+  //   title: 'Are you sure to delete?',
+  //   text: "You won't be able to revert this!",
+  //   icon: 'warning',
+  //   showCancelButton: true,
+  //   confirmButtonColor: '#3085d6',
+  //   cancelButtonColor: '#d33',
+  //   confirmButtonText: 'Yes, delete it!'
+  // }).then((result) => {
+  //   if (result.isConfirmed) {
+  //     Swal.fire(
+  //       'Deleted!',
+  //       'Your file has been deleted.',
+  //       'success'
+  //     )
+  //   }
+  // })
+
 
   const deleteHandler = async (product) => {
-    console.log(product._id)
-    if (window.confirm('Are you sure to delete?')) {
-      try {
-        await axios.delete(`/api/admin/deleteProduct/${product._id}`, {
-          headers: { Authorization: `Bearer ${userInfo.token}` },
-        });
-        toast.success('product deleted successfully');
-        dispatch({ type: 'DELETE_SUCCESS' });
-      } catch (err) {
-        toast.error(getError(error));
-        dispatch({
-          type: 'DELETE_FAIL',
-        });
+    // console.log(product._id)
+    Swal.fire({
+      title: 'Are you sure to delete?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        Swal.fire('Deleted!', 'Your file has been deleted.', 'success')
+        try {
+          await axios.delete(`/api/admin/deleteProduct/${product._id}`, {
+            headers: { Authorization: `Bearer ${userInfo.token}` },
+          });
+          toast.success('product deleted successfully');
+          dispatch({ type: 'DELETE_SUCCESS' });
+        } catch (err) {
+          toast.error(getError(error));
+          dispatch({
+            type: 'DELETE_FAIL',
+          });
+        }
       }
-    }
+    })
+    // if (window.confirm('Are you sure to delete?')) {
+     
+    // }
   };
 
   return (

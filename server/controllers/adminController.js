@@ -99,7 +99,7 @@ export async function getProducts(req, res) {
 export async function deleteProduct(req, res) {
     try {
         // const product = req.params.id
-        console.log(req.params)
+        // console.log(req.params)
         const product = await Product.deleteOne({ _id: req.params.id });
         if (product) {
             res.status(200).send({ message: 'Product has been Deleted' });
@@ -150,7 +150,7 @@ export async function addProduct(req, res) {
         })
         await newProduct.save()
         res.status(200).send({ message: `product is added successfully, ${newProduct}` })
-        console.log(newProduct)
+        // console.log(newProduct)
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
@@ -159,8 +159,8 @@ export async function addProduct(req, res) {
 
 // implement this method with frontend
 export async function updateProduct(req, res) {
-    console.log(req.body)
-    console.log(req.body.id)
+    // console.log(req.body)
+    // console.log(req.body.id)
     try {
         // const currentProduct = req.body.params
         // if(!currentProduct){
@@ -169,7 +169,7 @@ export async function updateProduct(req, res) {
         // }
         const product = req.body
         const currentProduct = await Product.findOne({ _id: req.body.id });
-        console.log('cur', currentProduct)
+        // console.log('cur', currentProduct)
         currentProduct.name = product.name,
             currentProduct.slug = currentProduct.slug,
             currentProduct.image = product.image,
@@ -216,7 +216,7 @@ export async function getOrders(req, res) {
 export async function deleteOrder(req, res) {
     try {
         // const product = req.params.id
-        console.log(req.params)
+        // console.log(req.params)
         const product = await Order.deleteOne({ _id: req.params.id });
         if (product) {
             res.status(200).send({ message: 'Order has been Deleted' });
