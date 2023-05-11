@@ -1,9 +1,12 @@
 import express from "express";
 import User from "../models/userModel.js";
 import { isAdmin, isAuth } from "../utils.js";
-import {  addProduct, deleteProduct, deleteUser, getAllUsers, getProducts, getUser, setUserAdmin, summaryOrders, updateProduct } from "../controllers/adminController.js";
+import {  addProduct, deleteOrder, deleteProduct, deleteUser, getAllUsers, getOrders, getProducts, getUser, setUserAdmin, summaryOrders, updateProduct } from "../controllers/adminController.js";
 
 const router = express.Router()
+
+// get orders
+router.get("/orders", isAuth, isAdmin, getOrders);
 
 // summary activity 
 router.get("/summary", isAuth, isAdmin, summaryOrders);
@@ -30,6 +33,8 @@ router.put("/updateProduct", isAuth, isAdmin, updateProduct)
 // set user to admin
 router.put("/setUser/:id", isAuth, isAdmin, setUserAdmin)
 
+// delete order
+router.delete("/orders/:id", isAuth, isAdmin, deleteOrder);
 
 
 

@@ -8,6 +8,8 @@ import MessageBox from '../components/MessageBox';
 import axios from 'axios';
 import { toast } from 'react-toastify'
 import UploadProduct from '../components/UploadProduct';
+import { Helmet } from 'react-helmet-async';
+import EditProduct from '../components/EditProduct';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -54,20 +56,7 @@ const reducer = (state, action) => {
 const AdminProductsScreen = () => {
 
   const [
-    {
-      loading,
-      error,
-      products,
-      pages,
-      loadingCreate,
-      loadingDelete,
-      successDelete,
-    },
-    dispatch,
-  ] = useReducer(reducer, {
-    loading: true,
-    error: '',
-  });
+    { loading, error, products, pages, loadingCreate, loadingDelete, successDelete, }, dispatch,] = useReducer(reducer, { loading: true, error: '', });
 
   const navigate = useNavigate();
   const { search } = useLocation();
@@ -94,32 +83,20 @@ const AdminProductsScreen = () => {
     }
   }, [page, userInfo, successDelete]);
 
-  // const createHandler = async () => {
-  //   if (window.confirm('Are you sure to create?')) {
-  //     try {
-  //       dispatch({ type: 'CREATE_REQUEST' });
-  //       const { data } = await axios.post(
-  //         '/api/products',
-  //         {},
-  //         {
-  //           headers: { Authorization: `Bearer ${userInfo.token}` },
-  //         }
-  //       );
-  //       toast.success('product created successfully');
-  //       dispatch({ type: 'CREATE_SUCCESS' });
-  //       navigate(`/admin/product/${data.product._id}`);
-  //     } catch (err) {
-  //       toast.error(getError(error));
-  //       dispatch({
-  //         type: 'CREATE_FAIL',
-  //       });
-  //     }
-  //   }
-  // };
 
-  const [open, setOpen] = useState(false)
+
+  const [openUpload, setOpenUpload] = useState(false)
+  
   const openUploadComponent = () => {
-    setOpen(!open)
+    setOpenUpload(!openUpload)
+  }
+
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [openEdit, setOpenEdit] = useState(false)
+
+  const openEditComponent = (product) => {
+    setOpenEdit(!openEdit);
+    setSelectedProduct(product);
   }
 
 
@@ -143,6 +120,9 @@ const AdminProductsScreen = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Products</title>
+      </Helmet>
       <Row>
         <Col>
           <h1>Products</h1>
@@ -189,7 +169,7 @@ const AdminProductsScreen = () => {
                     <Button
                       type="button"
                       variant="light"
-                      onClick={() => navigate(`/admin/product/${product._id}`)}
+                      onClick={()=>openEditComponent(product)}
                     >
                       Edit
                     </Button>
@@ -201,6 +181,8 @@ const AdminProductsScreen = () => {
                     >
                       Delete
                     </Button>
+                  {openUpload && <UploadProduct setOpen={setOpenUpload} userInfo={userInfo} />}
+                  {openEdit && <EditProduct setOpen={setOpenEdit} userInfo={userInfo} product={selectedProduct}/>}
                   </td>
                 </tr>
               ))}
@@ -219,7 +201,6 @@ const AdminProductsScreen = () => {
           </div>
         </>
       )}
-       {open && <UploadProduct setOpen={setOpen} userInfo={userInfo} />}
 
     </div>)
 }

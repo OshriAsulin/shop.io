@@ -3,47 +3,43 @@ import style from '../styles/UploadStyles.module.css'
 import { Button, Form } from 'react-bootstrap'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { getError } from '../utils'
+import { useNavigate } from 'react-router-dom'
 
 const reducer = (state, action) => {
     switch (action.type) {
-        case 'CREATE_REQUEST':
+        case 'UPDATE_REQUEST':
             return { ...state, loadingCreate: true };
-        case 'CREATE_SUCCESS':
+        case 'UPDATE_SUCCESS':
             return {
                 ...state,
                 loadingCreate: false,
             };
-        case 'CREATE_FAIL':
+        case 'UPDATE_FAIL':
             return { ...state, loadingCreate: false };
         default:
             return state;
     }
 };
 
-const UploadProduct = ({ setOpen, userInfo }) => {
+const EditProduct = ({ setOpen, userInfo, product }) => {
+    const navigate = useNavigate();
 
-    // const [
-    //     {
-    //         loading,
-    //         error,
-    //         products,
-    //         loadingCreate
-    //     }, dispatch,
-    // ] = useReducer(reducer, { loading: true, error: '' });
+    const [{ loading, error, products, loadingCreate }, dispatch] = useReducer(reducer, { loading: true, error: '' });
 
+    const [name, setName] = useState(product.name)
+    const [image, setImage] = useState(product.image)
+    const [brand, setBrand] = useState(product.brand)
+    const [description, setDescription] = useState(product.description)
+    const [category, setCategory] = useState(product.category)
+    const [price, setPrice] = useState(product.price)
+    const [countInStock, setCountInStock] = useState(product.countInStock)
 
-
-    const [name, setName] = useState('')
-    const [image, setImage] = useState('')
-    const [brand, setBrand] = useState('')
-    const [description, setDescription] = useState('')
-    const [category, setCategory] = useState('')
-    const [price, setPrice] = useState('')
-    const [countInStock, setCountInStock] = useState('')
-
+    // console.log(userInfo.name)
 
     const submitHandler = async (e) => {
         const output = {
+            id: product._id,
             name: name,
             image: image,
             brand: brand,
@@ -52,19 +48,20 @@ const UploadProduct = ({ setOpen, userInfo }) => {
             price: price,
             countInStock: countInStock,
         }
-        console.log(output)
+        console.log('output', output)
         e.preventDefault()
-        console.log(userInfo)
         try {
-            dispatch({ type: 'CREATE_REQUEST' });
-            const data = await axios.post('/api/admin/addProduct', output,
+            dispatch({ type: 'UPDATE_REQUEST' });
+            const data = await axios.put('/api/admin/updateProduct', output,
                 {
                     headers: { Authorization: `Bearer ${userInfo.token}` },
                 })
             console.log(data)
-            toast.success('The Product is added successfuly');
-            dispatch({ type: 'CREATE_SUCCESS' });
-            navigate(`/admin/products`);
+            toast.success('The Product is edited successfuly');
+            // navigate(`/admin/products`);
+            window.location.href = '/admin/products';
+
+            dispatch({ type: 'UPDATE_SUCCESS' });
         } catch (error) {
             toast.error(getError(error));
             dispatch({ type: 'UPDATE_FAIL' });
@@ -75,17 +72,17 @@ const UploadProduct = ({ setOpen, userInfo }) => {
         <div className={style.uploadContainer}>
             <div className={style.wrapperContainer}>
                 <div onClick={() => setOpen(false)} className={style.close}>X</div>
-                <h3 className={style.title}>Add Product</h3>
+                <h3 className={style.title}>Edit Product</h3>
                 <Form onSubmit={submitHandler}>
                     <Form.Group className="mb-3" controlId="name">
                         <Form.Label></Form.Label>
                         <Form.Control value={name} placeholder='Name' required onChange={(e) => setName(e.target.value)} />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="name">
+                    <Form.Group className="mb-3" controlId="image">
                         <Form.Label></Form.Label>
                         <Form.Control value={image} placeholder='Image' required onChange={(e) => setImage(e.target.value)} />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="name">
+                    <Form.Group className="mb-3" controlId="brand">
                         <Form.Label></Form.Label>
                         <Form.Control value={brand} placeholder='Brand' required onChange={(e) => setBrand(e.target.value)} />
                     </Form.Group>
@@ -96,15 +93,15 @@ const UploadProduct = ({ setOpen, userInfo }) => {
                         <option value="Pants">Pants</option>
                         <option value="Shoes">Shoes</option>
                     </Form.Select>
-                    <Form.Group className="mb-3" controlId="name">
+                    <Form.Group className="mb-3" controlId="description">
                         <Form.Label></Form.Label>
                         <Form.Control value={description} placeholder='Description' required onChange={(e) => setDescription(e.target.value)} />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="name">
+                    <Form.Group className="mb-3" controlId="price">
                         <Form.Label></Form.Label>
                         <Form.Control type='Number' placeholder='Price' value={price} required onChange={(e) => setPrice(e.target.value)} />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="name">
+                    <Form.Group className="mb-3" controlId="number">
                         <Form.Label></Form.Label>
                         <Form.Control type='Number' placeholder='Count In Stock' value={countInStock} required onChange={(e) => setCountInStock(e.target.value)} />
                     </Form.Group>
@@ -116,4 +113,4 @@ const UploadProduct = ({ setOpen, userInfo }) => {
     )
 }
 
-export default UploadProduct
+export default EditProduct

@@ -29,3 +29,7 @@ add the search box in navbr
 LIST IMAGES
 ADD PRODUCTS 
 ADD FILTER PRODUCTS 
+
+add design popup for ask the admin if he want to remove the user
+set in adminOrders the name of user , think how to add the name of user to any order
+

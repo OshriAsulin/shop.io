@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useContext, useEffect, useReducer, useState } from 'react'
 import { Store } from '../Store'
 import { Helmet } from 'react-helmet-async';
-import MessageBox from '../components/MessageBox';
+import MessageBox from '../components/MessageBox'; 
 import { Button, Form, Table } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import LoadingBox from '../components/LoadingBox';
@@ -41,13 +41,12 @@ const reducer = (state, action) => {
 
 const AdminUsersScreen = () => {
 
-  const navigate = useNavigate();
   const [{ loading, error, users, loadingDelete, successDelete }, dispatch] =
     useReducer(reducer, {
       loading: true,
       error: '',
     });
-// console.log(users)
+  // console.log(users)
   const { state } = useContext(Store);
   const { userInfo } = state
 
@@ -106,19 +105,18 @@ const AdminUsersScreen = () => {
   }
 
 
-  const [userInfoState, setUserInfoState] = useState({...users})
-console.log(userInfoState)
-  const setUserAdmin = async (user, isAdminValue) => {
-    console.log(user)
 
+  const setUserAdmin = async (user, isAdminValue) => {
     try {
       await axios.put(`/api/admin/setUser/${user._id}`, { isAdmin: isAdminValue }, {
         headers: { Authorization: `Bearer ${userInfo.token}` }
       })
-      setUserInfoState({ ...userInfo, isAdmin: isAdminValue })
-      console.log(setUserInfoState({ ...userInfo, isAdmin: isAdminValue }))
+      dispatch({
+        type: 'FETCH_SUCCESS',
+        payload: users.map(u => u._id === user._id ? { ...u, isAdmin: isAdminValue } : u)
+      });
       // console.log(data)
-      toast.success('user is admin now, successfully');
+      toast.success('set user successfully');
     } catch (error) {
       toast.error(getError(error));
     }

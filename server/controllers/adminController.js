@@ -159,6 +159,8 @@ export async function addProduct(req, res) {
 
 // implement this method with frontend
 export async function updateProduct(req, res) {
+    console.log(req.body)
+    console.log(req.body.id)
     try {
         // const currentProduct = req.body.params
         // if(!currentProduct){
@@ -166,35 +168,61 @@ export async function updateProduct(req, res) {
         //     return;
         // }
         const product = req.body
-        const currentProduct = await Product.findOne({ _id: req.prams.id });
+        const currentProduct = await Product.findOne({ _id: req.body.id });
+        console.log('cur', currentProduct)
         currentProduct.name = product.name,
-            currentProduct.slug = product.name.toLowerCase(),
-            currentProduct.image = product.image,
-            currentProduct.brand = product.brand,
-            currentProduct.description = product.description,
-            currentProduct.category = product.category,
-            currentProduct.price = product.price,
-            currentProduct.countInStock = product.countInStock,
-            currentProduct.numReviews = product.numReviews,
-            currentProduct.rating = product.numReviews
-        await currentProduct.save()
-        res.status(200).send({ message: `product is added successfully, ${currentProduct}` })
-        console.log(newProduct)
+        currentProduct.slug = product.name.toLowerCase(),
+        currentProduct.image = product.image,
+        currentProduct.brand = product.brand,
+        currentProduct.description = product.description,
+        currentProduct.category = product.category,
+        currentProduct.price = product.price,
+        currentProduct.countInStock = product.countInStock,
+        currentProduct.numReviews = currentProduct.numReviews,
+        currentProduct.rating = currentProduct.rating
+        await currentProduct.save();
+        res.status(200).json({ message: `product is updated successfully, ${currentProduct}` })
+        // console.log(currentProduct)
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
 }
 
-// implement this method
 export async function setUserAdmin(req, res) {
-    console.log(req.body.isAdmin)
     try {
         const user = await User.findOne({ _id: req.params.id })
-        console.log('check',user)
         user.isAdmin = req.body.isAdmin
         await user.save()
         res.status(200).send(user)
 
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
+
+export async function getOrders(req, res) {
+    try {
+        const orders = await Order.find();
+        console.log(orders)
+        res.status(200).send(orders)
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
+
+
+
+
+export async function deleteOrder(req, res) {
+    try {
+        // const product = req.params.id
+        console.log(req.params)
+        const product = await Order.deleteOne({ _id: req.params.id });
+        if (product) {
+            res.status(200).send({ message: 'Order has been Deleted' });
+        } else {
+            res.status(404).send({ message: 'Order Not Found' });
+        }
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
