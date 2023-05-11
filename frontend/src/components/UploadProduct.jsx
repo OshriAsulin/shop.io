@@ -3,6 +3,8 @@ import style from '../styles/UploadStyles.module.css'
 import { Button, Form } from 'react-bootstrap'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { getError } from '../utils'
+import { useNavigate } from 'react-router-dom'
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -10,8 +12,7 @@ const reducer = (state, action) => {
             return { ...state, loadingCreate: true };
         case 'CREATE_SUCCESS':
             return {
-                ...state,
-                loadingCreate: false,
+                ...state, loadingCreate: false,
             };
         case 'CREATE_FAIL':
             return { ...state, loadingCreate: false };
@@ -21,6 +22,7 @@ const reducer = (state, action) => {
 };
 
 const UploadProduct = ({ setOpen, userInfo }) => {
+    const navigate = useNavigate();
 
     // const [
     //     {
@@ -30,6 +32,7 @@ const UploadProduct = ({ setOpen, userInfo }) => {
     //         loadingCreate
     //     }, dispatch,
     // ] = useReducer(reducer, { loading: true, error: '' });
+    const [{ loading, error, products, loadingCreate }, dispatch] = useReducer(reducer, { loading: true, error: '' });
 
 
 
@@ -54,7 +57,7 @@ const UploadProduct = ({ setOpen, userInfo }) => {
         }
         console.log(output)
         e.preventDefault()
-        console.log(userInfo)
+        // console.log(userInfo)
         try {
             dispatch({ type: 'CREATE_REQUEST' });
             const data = await axios.post('/api/admin/addProduct', output,
@@ -64,7 +67,9 @@ const UploadProduct = ({ setOpen, userInfo }) => {
             console.log(data)
             toast.success('The Product is added successfuly');
             dispatch({ type: 'CREATE_SUCCESS' });
-            navigate(`/admin/products`);
+            // navigate(`/admin/products`);
+            window.location.href = '/admin/products';
+
         } catch (error) {
             toast.error(getError(error));
             dispatch({ type: 'UPDATE_FAIL' });

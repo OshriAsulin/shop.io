@@ -171,12 +171,12 @@ const AdminUsersScreen = () => {
                   />
                 </td>
                 <td>
-                  <Button type="button" variant="light"
-                  // onClick={() => navigate(`/admin/user/${user._id}`)}
-                  // onClick={openUpload}
+                  {/* <Button type="button" variant="light"
+                  onClick={() => navigate(`/admin/user/${user._id}`)}
+                  onClick={openUpload}
                   >
                     Edit
-                  </Button>
+                  </Button> */}
                   &nbsp;
                   {/* <Button onClick={change}>change</Button> */}
                   <Button type="button" variant="danger" onClick={() => deleteHandler(user)}>

@@ -1,9 +1,9 @@
 import express from "express";
 import User from "../models/userModel.js";
 import { isAdmin, isAuth } from "../utils.js";
-import {  addProduct, deleteOrder, deleteProduct, deleteUser, getAllUsers, getOrders, getProducts, getUser, setUserAdmin, summaryOrders, updateProduct } from "../controllers/adminController.js";
+import {  addProduct, deleteOrder, deleteProduct, deleteUser, getAllUsers, getOrders, getProducts, getUser, orderDeliver, setUserAdmin, summaryOrders, updateProduct } from "../controllers/adminController.js";
 
-const router = express.Router()
+const router = express.Router();
 
 // get orders
 router.get("/orders", isAuth, isAdmin, getOrders);
@@ -25,16 +25,19 @@ router.delete('/deleteProduct/:id',isAuth, isAdmin,  deleteProduct);
 
 router.get("/:id", isAuth, isAdmin, getUser);
 
-router.post("/addProduct", isAuth, isAdmin, addProduct)
+router.post("/addProduct", isAuth, isAdmin, addProduct);
 
 // implement this in frontend 
-router.put("/updateProduct", isAuth, isAdmin, updateProduct)
+router.put("/updateProduct", isAuth, isAdmin, updateProduct);
 
 // set user to admin
-router.put("/setUser/:id", isAuth, isAdmin, setUserAdmin)
+router.put("/setUser/:id", isAuth, isAdmin, setUserAdmin);
 
 // delete order
 router.delete("/orders/:id", isAuth, isAdmin, deleteOrder);
+
+// 
+router.put("/:id/deliver", isAuth, isAdmin, orderDeliver);
 
 
 

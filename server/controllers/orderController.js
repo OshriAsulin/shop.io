@@ -60,6 +60,28 @@ export async function payOrder(req, res) {
                 email_address: req.body.email_address
             };
             const updateOrder = await order.save();
+
+// here implement send email about the new order
+// const updatedOrder = await order.save();
+// mailgun()
+//   .messages()
+//   .send(
+//     {
+//       from: 'Amazona <amazona@mg.yourdomain.com>',
+//       to: `${order.user.name} <${order.user.email}>`,
+//       subject: `New order ${order._id}`,
+//       html: payOrderEmailTemplate(order),
+//     },
+//     (error, body) => {
+//       if (error) {
+//         console.log(error);
+//       } else {
+//         console.log(body);
+//       }
+//     }
+//   );
+
+
             res.status(200).send({ message: 'Order Paid', order: updateOrder })
         } else {
             res.status(404).send({ message: 'Order not found' })

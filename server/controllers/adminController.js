@@ -171,15 +171,15 @@ export async function updateProduct(req, res) {
         const currentProduct = await Product.findOne({ _id: req.body.id });
         console.log('cur', currentProduct)
         currentProduct.name = product.name,
-        currentProduct.slug = product.name.toLowerCase(),
-        currentProduct.image = product.image,
-        currentProduct.brand = product.brand,
-        currentProduct.description = product.description,
-        currentProduct.category = product.category,
-        currentProduct.price = product.price,
-        currentProduct.countInStock = product.countInStock,
-        currentProduct.numReviews = currentProduct.numReviews,
-        currentProduct.rating = currentProduct.rating
+            currentProduct.slug = currentProduct.slug,
+            currentProduct.image = product.image,
+            currentProduct.brand = product.brand,
+            currentProduct.description = product.description,
+            currentProduct.category = product.category,
+            currentProduct.price = product.price,
+            currentProduct.countInStock = product.countInStock,
+            currentProduct.numReviews = currentProduct.numReviews,
+            currentProduct.rating = currentProduct.rating
         await currentProduct.save();
         res.status(200).json({ message: `product is updated successfully, ${currentProduct}` })
         // console.log(currentProduct)
@@ -191,7 +191,7 @@ export async function updateProduct(req, res) {
 export async function setUserAdmin(req, res) {
     try {
         const user = await User.findOne({ _id: req.params.id })
-        user.isAdmin = req.body.isAdmin
+        user.isAdmin = Boolean(req.body.isAdmin)
         await user.save()
         res.status(200).send(user)
 
@@ -220,6 +220,23 @@ export async function deleteOrder(req, res) {
         const product = await Order.deleteOne({ _id: req.params.id });
         if (product) {
             res.status(200).send({ message: 'Order has been Deleted' });
+        } else {
+            res.status(404).send({ message: 'Order Not Found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
+
+
+export async function orderDeliver(req, res) {
+    try {
+        const order = await Order.findById(req.params.id);
+        if (order) {
+            order.isDelivered = true;
+            order.deliveredAt = Date.now();
+            await order.save();
+            res.status(200).send({ message: 'Order Delivered' });
         } else {
             res.status(404).send({ message: 'Order Not Found' });
         }
