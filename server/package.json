@@ -23,6 +23,8 @@
     "mongoose": "^7.0.4",
     "nodemailer": "^6.9.1",
     "nodemon": "^2.0.22",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "stripe": "^12.5.0",
+    "sweetalert2-react-content": "^5.0.7"
   }
 }

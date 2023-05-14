@@ -9,6 +9,8 @@ import { getError } from '../utils';
 import { Card, Col, ListGroup, Row, Button } from 'react-bootstrap';
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import { toast } from 'react-toastify';
+import AboutScreen from './AboutScreen';
+import StripePaymentBtn from '../components/StripePaymentBtn';
 function reducer(state, action) {
     switch (action.type) {
         case 'FETCH_REQUEST':
@@ -56,7 +58,7 @@ const OrderScreen = () => {
     const [{ loading, error, order, successPay, loadingDeliver, successDeliver, loadingPay }, dispatch] = useReducer(reducer, {
         loading: true, order: {}, error: '', successPay: false, loadingPay: false
     })
-    console.log(order)
+    // console.log(order)
     const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
 
 
@@ -159,10 +161,7 @@ const OrderScreen = () => {
         }
     }
 
-    const stripeScreen = () => {
-        navigate('/stripeScreen')
-    }
-
+  
 
     return (
 
@@ -283,11 +282,11 @@ const OrderScreen = () => {
                                                 {isPending ? (<LoadingBox />)
                                                     : (
                                                         <div>
-                                                            <PayPalButtons
+                                                            {order.paymentMethod == "PayPal" ? (<PayPalButtons
                                                                 createOrder={createOrder}
                                                                 onApprove={onApprove}
                                                                 onError={onError}
-                                                            ></PayPalButtons>
+                                                            ></PayPalButtons>) : (<StripePaymentBtn order={order} userInfo={userInfo} orderId={orderId} />)}
                                                         </div>
                                                     )}
                                                 {loadingPay && <LoadingBox></LoadingBox>}

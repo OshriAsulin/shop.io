@@ -6,7 +6,9 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Store } from '../Store'
 import { toast } from 'react-toastify'
 import { getError } from '../utils'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import UsePasswordToggle from '../components/UsePasswordToggle'
+import '../styles/SignUpStyles.css'
 const SigninScreen = () => {
     const navigate = useNavigate();
     const { search } = useLocation()
@@ -42,6 +44,7 @@ const SigninScreen = () => {
         }
     }, [navigate, redirect, userInfo])
 
+    const [toggleIconPassword, setToggleIconPassword] = UsePasswordToggle();
 
     return (
         <Container className='small-container'>
@@ -51,12 +54,15 @@ const SigninScreen = () => {
             <h1 className='my-3'>Sign In</h1>
             <Form onSubmit={submitHandler}>
                 <Form.Group className='mb-3' controlId='email'>
-                    <Form.Label>Email</Form.Label>
+                    <Form.Label> Email
+                        {/* <FontAwesomeIcon icon="user"/> */}
+                    </Form.Label>
                     <Form.Control type='email' required onChange={(e) => setEmail(e.target.value)} />
                 </Form.Group>
                 <Form.Group className='mb-3' controlId='password'>
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type='password' required onChange={(e) => setPassword(e.target.value)} />
+                    <Form.Control type={toggleIconPassword} required onChange={(e) => setPassword(e.target.value)} />
+                    <span className="set-password-toggle-icon">{setToggleIconPassword}</span>
                 </Form.Group>
                 <div className='mb-3'>
                     <button type='submit'>Sign In</button>

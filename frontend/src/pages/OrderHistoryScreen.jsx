@@ -60,6 +60,7 @@ const OrderHistoryScreen = () => {
                     <thead>
                         <tr>
                             <th>ID</th>
+                            {/* <th>TIME</th> */}
                             <th>DATE</th>
                             <th>TOTAL</th>
                             <th>PAID</th>
@@ -72,6 +73,7 @@ const OrderHistoryScreen = () => {
                             <tr key={order._id}>
                                 <td>{order._id}</td>
                                 <td>{order.createdAt.substring(0, 10)}</td>
+                                {/* <td>{order.createdAt.substring(11, 19)}</td> */}
                                 <td>{order.totalPrice.toFixed(2)}</td>
                                 <td>{order.isPaid ? order.paidAt.substring(0, 10) : 'No'}</td>
                                 <td>

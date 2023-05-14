@@ -1,4 +1,5 @@
 import React from 'react'
+import "./components/FontawesomeIcons"
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'

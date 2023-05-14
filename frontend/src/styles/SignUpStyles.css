@@ -1,0 +1,24 @@
+.set-password-toggle-icon {
+    position: absolute;
+    top: 260px;
+    right: 590px;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+
+@media  screen and (max-width: 1600px) {
+    .set-password-toggle-icon {
+        top: 260px;
+        right: 80px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .set-password-toggle-icon {
+        top: 248px;
+        right: 50px;
+    }
+}
+
+
