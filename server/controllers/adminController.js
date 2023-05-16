@@ -202,8 +202,7 @@ export async function setUserAdmin(req, res) {
 
 export async function getOrders(req, res) {
     try {
-        const orders = await Order.find();
-        console.log(orders)
+        const orders = await Order.find().populate('user');
         res.status(200).send(orders)
     } catch (error) {
         res.status(500).json({ message: error.message })

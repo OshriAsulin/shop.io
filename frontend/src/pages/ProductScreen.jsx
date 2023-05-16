@@ -9,6 +9,7 @@ import MessageBox from '../components/MessageBox';
 import { getError } from '../utils';
 import { Store } from '../Store.jsx';
 import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -65,7 +66,13 @@ const ProductScreen = () => {
         const quantity = existItem ? existItem.quantity + 1 : 1;
         const { data } = await axios.get(`/api/products/${product._id}`)
         if (data.countInStock < quantity) {
-            window.alert('Sorry. Product is out of stock')
+            Swal.fire({
+                title: 'Error',
+                text: 'The product is out of stock',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 2500
+              })
             return;
         }
         ctxDispatch({

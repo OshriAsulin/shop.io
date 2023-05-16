@@ -1,44 +1,38 @@
 1 change the style of buttons and hover them V
-
 2 change the style of pages V
-3 implement the validation of out of the stock
 4 create models and improve the backend V
 5 style the cart screen and how everyone is show V
 6 add .env file to gitignore V
-7 fix the button out of stock when its out of stock
-8 implement minus product in database when user make an order
-9 define in sign out function navigate to home screen 
-10 implement a btn for see the password that the user can see the password when is create her pass word
-11 add summary order after the payment is success
-12 set image size in product component and in product screen 
-13 add design alert for message 
-14 add the search box in navbr
-
+9 define in sign out function navigate to home screen V
+10 implement a btn for see the password that the user can see the password when is create her password V 
+12 set image size in product component and in product screen V
+13 add design alert for message V
+14 add the search box in navbr V
 15 in the next time implement all admin panels 
 16 add swiper images to home page
 17 add READ.me file 
+18 change all the color and hover to the same color
+19 add the search box in navbr V
+// add all functions of admin V
+ADD FILTER PRODUCTS V
+add design popup for ask the admin if he want to remove the user V
 
 
+// add isAdmin validation backend
+7 fix the button out of stock when its out of stock
+8 implement minus product in database when user make an order 
+3 implement the validation of out of the stock
 
-// add isAdmin validation 
-// add all functions of admin 
 
-
-
-add the search box in navbr
 LIST IMAGES
-ADD PRODUCTS 
-ADD FILTER PRODUCTS 
 
-add design popup for ask the admin if he want to remove the user
 set in adminOrders the name of user , think how to add the name of user to any order
 
 בערב לעצב מחדש את הform של sign in and login and add the hide password toggle 
-
-למממש את המיקום בהזמנה 
+change in search screen all the pages and when its response a 5 or more products so return this instead of 3 every time 
 
 להוסיף unit test 
 
-לעדכן את העמוד הזמנה כשחוזרת תגובה חיובית של חיוב של stripe 
+לעדכן את העמוד הזמנה כשחוזרת תגובה חיובית של חיוב של stripe 1
 
 deploy images to cloudlinary 

@@ -2,12 +2,13 @@ import axios from 'axios'
 import React, { useContext, useEffect, useReducer, useState } from 'react'
 import { Store } from '../Store'
 import { Helmet } from 'react-helmet-async';
-import MessageBox from '../components/MessageBox'; 
+import MessageBox from '../components/MessageBox';
 import { Button, Form, Table } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import LoadingBox from '../components/LoadingBox';
 import { getError } from '../utils';
 import { toast } from 'react-toastify'
+import Swal from 'sweetalert2';
 
 
 const reducer = (state, action) => {
@@ -87,21 +88,49 @@ const AdminUsersScreen = () => {
   }, [userInfo, successDelete]);
 
   const deleteHandler = async (user) => {
-    console.log(user._id)
-    if (window.confirm('Are you sure to delete?')) {
-      try {
-        dispatch({ type: "DELETE_REQUEST" })
-        await axios.delete(`/api/admin/${user._id}`, {
-          headers: { Authorization: `Bearer ${userInfo.token}` }
-        })
-        // console.log(data)
-        toast.success('user deleted successfully');
-        dispatch({ type: 'DELETE_SUCCESS' });
-      } catch (error) {
-        toast.error(getError(error));
-        dispatch({ type: 'DELETE_FAIL' });
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "Are you sure to delete user?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          dispatch({ type: "DELETE_REQUEST" })
+          const response = await axios.delete(`/api/admin/${user._id}`, {
+            headers: { Authorization: `Bearer ${userInfo.token}` }
+          })
+          console.log(response.status)
+          toast.success('user deleted successfully');
+          dispatch({ type: 'DELETE_SUCCESS' });
+        } catch (error) {
+          toast.error(getError(error));
+          dispatch({ type: 'DELETE_FAIL' });
+        }
       }
-    }
+
+    })
+    // if (window.confirm(response.status == 200)) {
+    //   try {
+    //     dispatch({ type: "DELETE_REQUEST" })
+    //     const response = await axios.delete(`/api/admin/${user._id}`, {
+    //       headers: { Authorization: `Bearer ${userInfo.token}` }
+    //     })
+    //     console.log(response.status)
+    //     if(response.status == 200)
+    //     {
+    //       alert('test success')
+    //     }
+    //     toast.success('user deleted successfully');
+    //     dispatch({ type: 'DELETE_SUCCESS' });
+    //   } catch (error) {
+    //     toast.error(getError(error));
+    //     dispatch({ type: 'DELETE_FAIL' });
+    //   }
+    // }
   }
 
 
@@ -147,6 +176,7 @@ const AdminUsersScreen = () => {
         <Table className="table" responsive>
           <thead>
             <tr>
+              <th>INDEX</th>
               <th>ID</th>
               <th>NAME</th>
               <th>EMAIL</th>
@@ -155,8 +185,9 @@ const AdminUsersScreen = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
+            {users.map((user, index) => (
               <tr key={user._id}>
+                <td>{index + 1}</td>
                 <td>{user._id}</td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>

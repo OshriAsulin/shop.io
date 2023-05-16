@@ -4,10 +4,11 @@ import { getError } from '../utils';
 import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
-import MessageBox from '../components/MessageBox'; 
+import MessageBox from '../components/MessageBox';
 import LoadingBox from '../components/LoadingBox';
 import { Button, Table } from 'react-bootstrap';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 
 const reducer = (state, action) => {
@@ -15,11 +16,7 @@ const reducer = (state, action) => {
     case 'FETCH_REQUEST':
       return { ...state, loading: true };
     case 'FETCH_SUCCESS':
-      return {
-        ...state,
-        orders: action.payload,
-        loading: false,
-      };
+      return { ...state, orders: action.payload, loading: false };
     case 'FETCH_FAIL':
       return { ...state, loading: false, error: action.payload };
     case 'DELETE_REQUEST':
@@ -49,36 +46,47 @@ const AdminOrdersScreen = () => {
       error: '',
     });
 
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          dispatch({ type: 'FETCH_REQUEST' });
-          const { data } = await axios.get(`/api/admin/orders`, {
-            headers: { Authorization: `Bearer ${userInfo.token}` },
-          });
-          dispatch({ type: 'FETCH_SUCCESS', payload: data });
-        } catch (err) {
-          dispatch({
-            type: 'FETCH_FAIL',
-            payload: getError(err),
-          });
-        }
-      };
-      if (successDelete) {
-        dispatch({ type: 'DELETE_RESET' });
-      } else {
-        fetchData();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        dispatch({ type: 'FETCH_REQUEST' });
+        const {data} = await axios.get(`/api/admin/orders`, {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
+        });
+        console.log(data)
+        dispatch({ type: 'FETCH_SUCCESS', payload: data });
+      } catch (err) {
+        dispatch({
+          type: 'FETCH_FAIL',
+          payload: getError(err),
+        });
       }
-    }, [userInfo, successDelete]);
-  
-    const deleteHandler = async (order) => {
-      if (window.confirm('Are you sure to delete?')) {
+    };
+    if (successDelete) {
+      dispatch({ type: 'DELETE_RESET' });
+    } else {
+      fetchData();
+    }
+  }, [userInfo, successDelete]);
+
+  const deleteHandler = async (order) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "Are you sure to delete order?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
         try {
           dispatch({ type: 'DELETE_REQUEST' });
           await axios.delete(`/api/admin/orders/${order._id}`, {
             headers: { Authorization: `Bearer ${userInfo.token}` },
           });
           toast.success('order deleted successfully');
+
           dispatch({ type: 'DELETE_SUCCESS' });
         } catch (err) {
           toast.error(getError(error));
@@ -86,10 +94,13 @@ const AdminOrdersScreen = () => {
             type: 'DELETE_FAIL',
           });
         }
+
       }
-    };
+    })
+
+  };
   return (
-<div>
+    <div>
       <Helmet>
         <title>Orders</title>
       </Helmet>
@@ -103,6 +114,7 @@ const AdminOrdersScreen = () => {
         <Table responsive className="table">
           <thead>
             <tr>
+              <th>INDEX</th>
               <th>ID</th>
               <th>USER</th>
               <th>DATE</th>
@@ -113,8 +125,9 @@ const AdminOrdersScreen = () => {
             </tr>
           </thead>
           <tbody>
-            {orders.map((order) => (
+            {orders.map((order, index) => (
               <tr key={order._id}>
+                <td>{index + 1}</td>
                 <td>{order._id}</td>
                 <td>{order.user ? order.user.name : 'DELETED USER'}</td>
                 <td>{order.createdAt.substring(0, 10)}</td>
@@ -150,7 +163,7 @@ const AdminOrdersScreen = () => {
           </tbody>
         </Table>
       )}
-    </div>  )
+    </div>)
 }
 
 export default AdminOrdersScreen

@@ -4,6 +4,7 @@ import Rating from './Rating'
 import { Store } from '../Store'
 import axios from 'axios'
 import { NavLink} from 'react-router-dom'
+import Swal from 'sweetalert2'
 const Product = (props) => {
     const { product } = props
     const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -15,7 +16,13 @@ const Product = (props) => {
         const quantity = existItem ? existItem.quantity + 1 : 1;
         const { data } = await axios.get(`/api/products/${item._id}`);
         if (data.countInStock < quantity) {
-            window.alert('Sorry. Product is out of stock')
+            Swal.fire({
+                title: 'Error',
+                text: 'The product is out of stock',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 2500
+              })
             return;
         }
         ctxDispatch({

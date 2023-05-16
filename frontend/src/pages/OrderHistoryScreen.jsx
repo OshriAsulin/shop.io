@@ -6,7 +6,7 @@ import { Store } from '../Store'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { getError } from '../utils'
-import { Button } from 'react-bootstrap'
+import { Button, Table } from 'react-bootstrap'
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -56,11 +56,11 @@ const OrderHistoryScreen = () => {
             ) : error ? (
                 <MessageBox variant="danger">{error}</MessageBox>
             ) : (
-                <table className='table'>
+                <Table responsive className='table'>
                     <thead>
                         <tr>
                             <th>ID</th>
-                            {/* <th>TIME</th> */}
+                            <th>INDEX</th>
                             <th>DATE</th>
                             <th>TOTAL</th>
                             <th>PAID</th>
@@ -69,11 +69,11 @@ const OrderHistoryScreen = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {orders.map((order) => (
+                        {orders.map((order, index) => (
                             <tr key={order._id}>
+                                <td>{index + 1}</td>
                                 <td>{order._id}</td>
                                 <td>{order.createdAt.substring(0, 10)}</td>
-                                {/* <td>{order.createdAt.substring(11, 19)}</td> */}
                                 <td>{order.totalPrice.toFixed(2)}</td>
                                 <td>{order.isPaid ? order.paidAt.substring(0, 10) : 'No'}</td>
                                 <td>
@@ -95,7 +95,7 @@ const OrderHistoryScreen = () => {
                             </tr>
                         ))}
                     </tbody>
-                </table>
+                </Table>
             )}
 
         </div>

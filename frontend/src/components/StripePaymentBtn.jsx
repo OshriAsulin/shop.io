@@ -5,7 +5,7 @@ import withReactContent from 'sweetalert2-react-content';
 import axios from 'axios'
 
 
-const StripePaymentBtn = ({ order, userInfo, orderId }) => {
+const StripePaymentBtn = ({ order, userInfo, orderId, onPaymentSuccess  }) => {
 
     console.log(order.totalPrice)
     const priceForStripe = order.totalPrice * 100;
@@ -20,7 +20,7 @@ const StripePaymentBtn = ({ order, userInfo, orderId }) => {
             const response = await axios.post(`/api/orders/stripePayment`, data,
                 { headers: { authorization: `Bearer ${userInfo.token}` } }
             );
-            console.log('res-----',response)      
+            console.log('res-----', response)
             if (response.status === 200) {
                 MySwal.fire({
                     icon: 'success',
@@ -29,8 +29,8 @@ const StripePaymentBtn = ({ order, userInfo, orderId }) => {
                 });
             }
             const transaction = response.data.details.transaction
-            console.log(response.data.details.transaction)      
-            const updateOrder = await axios.put(`/api/orders/updateOrder/${orderId}`, transaction,
+            console.log(response.data.details.transaction)
+            await axios.put(`/api/orders/updateOrder/${orderId}`, transaction,
                 { headers: { authorization: `Bearer ${userInfo.token}` } }
             );
 

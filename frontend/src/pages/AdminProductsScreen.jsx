@@ -87,7 +87,7 @@ const AdminProductsScreen = () => {
 
 
   const [openUpload, setOpenUpload] = useState(false)
-  
+
   const openUploadComponent = () => {
     setOpenUpload(!openUpload)
   }
@@ -123,7 +123,7 @@ const AdminProductsScreen = () => {
     // console.log(product._id)
     Swal.fire({
       title: 'Are you sure to delete?',
-      text: "You won't be able to revert this!",
+      text: "Are you sure to delete product?",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -131,7 +131,6 @@ const AdminProductsScreen = () => {
       confirmButtonText: 'Yes, delete it!'
     }).then(async (result) => {
       if (result.isConfirmed) {
-        Swal.fire('Deleted!', 'Your file has been deleted.', 'success')
         try {
           await axios.delete(`/api/admin/deleteProduct/${product._id}`, {
             headers: { Authorization: `Bearer ${userInfo.token}` },
@@ -146,9 +145,6 @@ const AdminProductsScreen = () => {
         }
       }
     })
-    // if (window.confirm('Are you sure to delete?')) {
-     
-    // }
   };
 
   return (
@@ -202,7 +198,7 @@ const AdminProductsScreen = () => {
                     <Button
                       type="button"
                       variant="light"
-                      onClick={()=>openEditComponent(product)}
+                      onClick={() => openEditComponent(product)}
                     >
                       Edit
                     </Button>
@@ -214,8 +210,8 @@ const AdminProductsScreen = () => {
                     >
                       Delete
                     </Button>
-                  {openUpload && <UploadProduct setOpen={setOpenUpload} userInfo={userInfo} />}
-                  {openEdit && <EditProduct setOpen={setOpenEdit} userInfo={userInfo} product={selectedProduct}/>}
+                    {openUpload && <UploadProduct setOpen={setOpenUpload} userInfo={userInfo} />}
+                    {openEdit && <EditProduct setOpen={setOpenEdit} userInfo={userInfo} product={selectedProduct} />}
                   </td>
                 </tr>
               ))}

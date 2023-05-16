@@ -1,6 +1,7 @@
 import React from 'react'
 import ImagesSlides from '../components/ImagesSlides'
 import Images from '../components/Images'
+import Categories from '../components/Categories'
 
 
 const AboutScreen = () => {
@@ -10,8 +11,7 @@ const AboutScreen = () => {
   return (
     // <ImagesSlides/>
     <>
-      <div>AboutScreen</div>
-      <br />
+    
      <Images/>
       
     </>

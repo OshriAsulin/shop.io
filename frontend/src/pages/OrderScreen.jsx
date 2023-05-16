@@ -113,6 +113,7 @@ const OrderScreen = () => {
         if (!userInfo) {
             return navigate('/login');
         }
+        
 
         if (!order._id || successPay || successDeliver || (order._id && order._id !== orderId)) {
             fetchOrder();
@@ -184,7 +185,7 @@ const OrderScreen = () => {
                                         {order.shippingAddress.city}, {order.shippingAddress.postalCode}
                                         ,{order.shippingAddress.country}
                                         &nbsp;
-                                        {order.shippingAddress.location &&
+                                        {/* {order.shippingAddress.location &&
                                             order.shippingAddress.location.lat && (
                                                 <a
                                                     target="_new"
@@ -192,7 +193,7 @@ const OrderScreen = () => {
                                                 >
                                                     Show On Map
                                                 </a>
-                                            )}
+                                            )} */}
                                     </Card.Text>
                                     {order.isDelivered ? (
                                         <MessageBox variant="success">

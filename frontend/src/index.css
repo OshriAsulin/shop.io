@@ -199,6 +199,8 @@ button:hover {
 
 
 
+
+
 @media screen and (max-width: 600px) {
   .cart-details{
     display: grid;
@@ -220,4 +222,56 @@ button:hover {
   .cart-details img {
     max-width: 600px;
   }
+}
+
+.search-button{
+background-color: #a0a0a0;
+margin-left: 2rem;
+}
+
+/* sidebar */
+.navbar-brand {
+  font-weight: bold;
+}
+.side-navbar {
+  width: 240px;
+  height: 100%;
+  position: absolute;
+  left: -300px;
+  background-color: rgb(55, 45, 34);
+  transition: 0.5s;
+}
+
+.site-container {
+  transition: 0.4s;
+}
+.active-container {
+  margin-left: 240px;
+}
+.active-nav {
+  left: 0;
+}
+.text-bold {
+  font-weight: bold;
+}
+
+/* style the filter in search screen */
+.filter-container{
+  border:2px solid #c3c4ca;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 15px;
+}
+.filter-container > ul{
+  list-style-type: none;
+}
+
+.div-container{
+  display: flex;
+  /* border:2px solid #636780;
+  border-radius: 10px; */
+}
+
+.div-container > span{
+  cursor: pointer;
 }

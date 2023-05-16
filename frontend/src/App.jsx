@@ -1,15 +1,15 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import { Link, Route, Routes } from 'react-router-dom'
 import HomeScreen from './pages/HomeScreen'
 import ProductScreen from './pages/ProductScreen'
-import { Badge, Container, Nav, NavDropdown, Navbar } from 'react-bootstrap'
+import { Badge, Button, Container, Nav, NavDropdown, Navbar } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Store } from './Store.jsx'
 import CartScreen from './pages/CartScreen'
 import SigninScreen from './pages/SigninScreen'
-import { ToastContainer } from 'react-toastify'
+import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import ShippingAddressScreen from './pages/ShippingAddressScreen'
 import SignupScreen from './pages/SignupScreen'
@@ -27,6 +27,10 @@ import ResetPasswordScreen from './pages/ResetPasswordScreen'
 import AdminProductsScreen from './pages/AdminProductsScreen'
 import AdminOrdersScreen from './pages/AdminOrdersScreen'
 import AdminUsersScreen from './pages/AdminUsersScreen'
+import axios from 'axios'
+import { getError } from './utils'
+import SearchBox from './components/SearchBox'
+import SearchScreen from './pages/SearchScreen'
 
 
 function App() {
@@ -42,9 +46,22 @@ function App() {
     window.location.href = '/signin';
   }
 
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [categories, setCategories] = useState([])
+  useEffect(() => {
+    const fecthCategories = async () => {
+      try {
+        const { data } = await axios.get('/api/products/categories')
+        setCategories(data)
+      } catch (error) {
+        toast.error(getError(error));
+      }
+    }
+    fecthCategories()
+  }, [])
   return (
     <>
-      <div className='d-flex flex-column site-container'>
+      <div className={sidebarOpen ? 'd-flex flex-column site-container active-container' : 'd-flex flex-column site-container'}>
         <ToastContainer position='bottom-center' limit={1} />
         <header>
           <Navbar bg="dark" variant='dark' expand="lg">
@@ -54,11 +71,20 @@ function App() {
               {/* <Navbar.Brand></Navbar.Brand> */}
               {/* <a>Shop.io</a> */}
               {/* </LinkContainer> */}
+              <Button
+                variant="dark"
+                onClick={() => setSidebarOpen(!sidebarOpen)}
+              >
+                <i className="fas fa-bars"></i>
+              </Button>
               <div>
                 <Link className='app-title' to='/'>Shop.io</Link>
               </div>
               <Navbar.Toggle aria-controls='basic-navbar-nav'></Navbar.Toggle>
               <Navbar.Collapse id='basic-navbar-nav'>
+                <div className="search-button">
+                  <SearchBox/>
+                </div>
                 <Nav className='me-auto w-100 justify-content-end'>
                   <Link className='nav-link' to="/about">About</Link>
                   <Link to='/cart' className='nav-link'>
@@ -110,11 +136,35 @@ function App() {
             </Container>
           </Navbar>
         </header>
+        {/*  */}
+        <div className={
+          sidebarOpen
+            ? 'active-nav side-navbar d-flex justify-content-between flex-wrap flex-column'
+            : 'side-navbar d-flex justify-content-between flex-wrap flex-column'
+        }>
+          <Nav className="flex-column text-white w-100 p-2">
+            <Nav.Item>
+              <strong>Categories</strong>
+            </Nav.Item>
+            {categories.map((category) => (
+              <Nav.Item key={category}>
+                <LinkContainer style={{color: '#fff'}}
+                  to={{ pathname: '/search', search: `category=${category}` }}
+                  onClick={() => setSidebarIsOpen(false)}
+                >
+                  <Nav.Link>{category}</Nav.Link>
+                </LinkContainer>
+              </Nav.Item>
+            ))}
+          </Nav>
+        </div>
+        {/*  */}
         <main>
           <Container className='mt-3'>
             <Routes>
               <Route path='/product/:slug' element={<ProductScreen />} />
               <Route path='/cart' element={<CartScreen />} />
+              <Route path='/search' element={<SearchScreen />} />
               <Route path='/about' element={<AboutScreen />} />
               <Route path='/signin' element={<SigninScreen />} />
               <Route path='/signup' element={<SignupScreen />} />
@@ -123,7 +173,7 @@ function App() {
               <Route path='/payment' element={<PaymentMethodScreen />} />
               <Route path='/placeorder' element={<PlaceOrderScreen />} />
               <Route path='/forget-password' element={<ForgetPasswordScreen />} />
-              <Route path='/reset-password/:token' element={<ResetPasswordScreen/>} />
+              <Route path='/reset-password/:token' element={<ResetPasswordScreen />} />
               <Route path='/order/:id' element={<ProtectedRoute><OrderScreen /></ProtectedRoute>} />
               <Route path='/orderhistory' element={<ProtectedRoute><OrderHistoryScreen /></ProtectedRoute>} />
               {/**admin routes */}
