@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useReducer, useRef, useState } from 'react'
 import { Badge, Button, Card, Col, FloatingLabel, Form, ListGroup, Row } from 'react-bootstrap';
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import Rating from '../components/Rating';
 import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
