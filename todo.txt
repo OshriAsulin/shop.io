@@ -33,3 +33,12 @@ ADD FILTER PRODUCTS
 add design popup for ask the admin if he want to remove the user
 set in adminOrders the name of user , think how to add the name of user to any order
 
+בערב לעצב מחדש את הform של sign in and login and add the hide password toggle 
+
+למממש את המיקום בהזמנה 
+
+להוסיף unit test 
+
+לעדכן את העמוד הזמנה כשחוזרת תגובה חיובית של חיוב של stripe 
+
+deploy images to cloudlinary 

@@ -1,10 +1,9 @@
 import React, { useContext } from 'react'
 import {  Card } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
 import Rating from './Rating'
 import { Store } from '../Store'
 import axios from 'axios'
-
+import { NavLink} from 'react-router-dom'
 const Product = (props) => {
     const { product } = props
     const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -26,13 +25,13 @@ const Product = (props) => {
     }
     return (
         <Card className='product'>
-            <Link to={`/product/${product.slug}`}>
+            <NavLink to={`/product/${product.slug}`}>
                 <img src={product.image} className='card-img-top' alt={product.name} />
-            </Link>
+            </NavLink>
             <Card.Body>
-                <Link to={`/product/${product.slug}`}>
+                <NavLink to={`/product/${product.slug}`}>
                     <Card.Title>{product.name}</Card.Title>
-                </Link>
+                </NavLink>
                 <Rating rating={product.rating} numReviews={product.numReviews} />
                 <Card.Text>${product.price}</Card.Text>
                 {product.countInStock === 0 ?
