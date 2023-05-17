@@ -16,6 +16,16 @@
 // add all functions of admin V
 ADD FILTER PRODUCTS V
 add design popup for ask the admin if he want to remove the user V
+create product V
+edit product V
+edit user V
+edit to be admin V
+confirm order V
+להשלים את העדכון כשמשנים לadmin כל user שיעודכן בו זמנית עם השליחה לשרת V
+לממש את הפונקציה שמאפשרת לראות סיסמא V
+לממש את הstripe payment method - V
+לשלוח מייל ביצירת הזמנה חדשה V
+
 
 
 // add isAdmin validation backend
@@ -35,4 +45,17 @@ change in search screen all the pages and when its response a 5 or more products
 
 לעדכן את העמוד הזמנה כשחוזרת תגובה חיובית של חיוב של stripe 1
 
-deploy images to cloudlinary 
+add bot
+add images to home page and improve the ui
+add more  products
+בהוספת פריט חדש- הslug שווה לname  
+
+
+להעלות את כל התמונות לcloudlinary ולהוסיף את זה גם לפונקציות של ההוספה של פריט חדש
+
+
+
+
+
+לבדוק את השגיאה ביצירת הזמנה חדשה שהוא לא מציג את השעה הנכונה שבה ההזמנה נוצרה 
+לנסות ליצור form שנראה טוב יותר בכדי לשים בתוכו את האייקונים 
