@@ -294,3 +294,13 @@ margin-left: 2rem;
 /* .fullscreen .image-gallery-slide img {
   max-height: 100vh;
 } */
+
+
+.spinner{
+  color: #6a675d;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}

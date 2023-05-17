@@ -59,3 +59,8 @@ add more  products
 
 לבדוק את השגיאה ביצירת הזמנה חדשה שהוא לא מציג את השעה הנכונה שבה ההזמנה נוצרה 
 לנסות ליצור form שנראה טוב יותר בכדי לשים בתוכו את האייקונים 
+
+
+add vitest for testing the frontend 
+
+add the jest unittesting to backend 

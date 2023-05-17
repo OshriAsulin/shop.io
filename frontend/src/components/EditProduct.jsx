@@ -105,7 +105,7 @@ const EditProduct = ({ setOpen, userInfo, product }) => {
                         <Form.Label></Form.Label>
                         <Form.Control type='Number' placeholder='Count In Stock' value={countInStock} required onChange={(e) => setCountInStock(e.target.value)} />
                     </Form.Group>
-                    <Button type='submit' className={style.sendButton}>Add</Button>
+                    <Button type='submit' className={style.sendButton}>Update</Button>
                 </Form>
 
             </div>
