@@ -45,7 +45,7 @@ export const baseUrl = () =>
     process.env.BASE_URL ?
         process.env.BASE_URL : process.env.NODE_ENV !== 'production'
             ? 'http://localhost:5173'
-            : 'https://shop-io-app.onrender.com';
+            : 'shop-io.up.railway.app';
 
 
 
