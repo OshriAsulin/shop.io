@@ -57,9 +57,10 @@ const EditProduct = ({ setOpen, userInfo, product }) => {
                     headers: { Authorization: `Bearer ${userInfo.token}` },
                 })
             console.log(data)
-            toast.success('The Product is edited successfuly');
+            console.log("product updated")
             // navigate(`/admin/products`);
             window.location.href = '/admin/products';
+            toast.success('The Product is edited successfuly');
 
             dispatch({ type: 'UPDATE_SUCCESS' });
         } catch (error) {
