@@ -80,8 +80,8 @@ main {
 
 .product img {
   /* width: 300px; */
+  max-width: 400px;
   height: 390px;
-  /* max-width: 400px; */
   
 }
 

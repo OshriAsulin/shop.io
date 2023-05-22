@@ -33,7 +33,7 @@ const Product = (props) => {
     return (
         <Card className='product'>
             <NavLink to={`/product/${product.slug}`}>
-                <img src={product.image} className='card-img-top' alt={product.name} />
+                <img src={product.image} className='card-img-top' alt={product.name} title={product.name} />
             </NavLink>
             <Card.Body>
                 <NavLink to={`/product/${product.slug}`}>

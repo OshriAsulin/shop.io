@@ -21,7 +21,7 @@ const SearchBox = () => {
         aria-label="Search Products"
         aria-describedby="button-search"
       ></FormControl>
-      <button variant="outline-primary" type="submit" id="button-search">
+      <button aria-label="Search" variant="outline-primary" type="submit" id="button-search">
         <i className="fas fa-search"></i>
       </button>
     </InputGroup>
