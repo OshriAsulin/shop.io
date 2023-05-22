@@ -12,8 +12,8 @@ const AboutScreen = () => {
     // <ImagesSlides/>
     <>
     
-     <Images/>
-      
+     {/* <Images/> */}
+      <div>About screen</div>
     </>
   )
 }
