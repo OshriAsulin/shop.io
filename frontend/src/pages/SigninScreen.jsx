@@ -61,8 +61,10 @@ const SigninScreen = () => {
                 </Form.Group>
                 <Form.Group className='mb-3' controlId='password'>
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type={toggleIconPassword} required onChange={(e) => setPassword(e.target.value)} />
-                    <span className="set-password-toggle-icon">{setToggleIconPassword}</span>
+                    <div className="password-container">
+                        <Form.Control type={toggleIconPassword} required onChange={(e) => setPassword(e.target.value)} />
+                        <span className="toggle-icon">{setToggleIconPassword}</span>
+                    </div>
                 </Form.Group>
                 <div className='mb-3'>
                     <button type='submit'>Sign In</button>

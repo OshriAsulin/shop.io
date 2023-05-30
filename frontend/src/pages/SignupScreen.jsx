@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Store } from '../Store'
 import { toast } from 'react-toastify'
 import { getError } from '../utils'
+import UsePasswordToggle from '../components/UsePasswordToggle'
 
 const SignupScreen = () => {
     const navigate = useNavigate();
@@ -21,17 +22,17 @@ const SignupScreen = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    // const [errorMessage, setErrorMessage] = useState(false)
+    const [toggleIconPassword, setToggleIconPassword] = UsePasswordToggle();
     const submitHandler = async (e) => {
         console.log(e)
         e.preventDefault();
-        if(password !== confirmPassword){
+        if (password !== confirmPassword) {
             toast.error('Passwords do not match');
             return;
         }
         try {
             const { data } = await axios.post('/api/users/signup', {
-               name, email, password
+                name, email, password
             });
             ctxDispatch({ type: 'USER_SIGNIN', payload: data })
             localStorage.setItem('userInfo', JSON.stringify(data))
@@ -67,13 +68,18 @@ const SignupScreen = () => {
                 </Form.Group>
                 <Form.Group className='mb-3' controlId='password'>
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type='password' required onChange={(e) => setPassword(e.target.value)} />
+                    <div className="password-container">
+                        <Form.Control type={toggleIconPassword} required onChange={(e) => setPassword(e.target.value)} />
+                        <span className="toggle-icon">{setToggleIconPassword}</span>
+                    </div>
                 </Form.Group>
                 <Form.Group className='mb-3' controlId='ConfirmPassword'>
                     <Form.Label>Confirm Password</Form.Label>
-                    <Form.Control type='password' required onChange={(e) => setConfirmPassword(e.target.value)} />
+                    <div className="password-container">
+                        <Form.Control type={toggleIconPassword} required onChange={(e) => setConfirmPassword(e.target.value)} />
+                        <span className="toggle-icon">{setToggleIconPassword}</span>
+                    </div>
                 </Form.Group>
-                {/* {errorMessage && <div style={{ color: 'red' }}> error</div>} */}
                 <div className='mb-3'>
                     <button type='submit'>Sign Up</button>
                 </div>

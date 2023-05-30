@@ -1,24 +1,11 @@
-.set-password-toggle-icon {
+.password-container {
+    position: relative;
+}
+
+.toggle-icon {
     position: absolute;
-    top: 270px;
-    right: 350px;
-    z-index: 1000;
-    cursor: pointer;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
 }
-
-
-@media  screen and (max-width: 1600px) {
-    .set-password-toggle-icon {
-        top: 260px;
-        right: 80px;
-    }
-}
-
-@media only screen and (max-width: 1024px) {
-    .set-password-toggle-icon {
-        top: 253px;
-        right: 150px;
-    }
-}
-
 
