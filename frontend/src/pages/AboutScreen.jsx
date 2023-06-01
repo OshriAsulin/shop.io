@@ -9,11 +9,10 @@ const AboutScreen = () => {
 
  
   return (
-    // <ImagesSlides/>
     <>
-    
-     {/* <Images/> */}
-      <div>About screen</div>
+          <div>
+            <h3>About This Website</h3>
+          </div>
     </>
   )
 }
