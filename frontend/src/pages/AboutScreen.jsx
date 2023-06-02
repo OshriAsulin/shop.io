@@ -7,7 +7,7 @@ const AboutScreen = () => {
   return (
     <>
       <div>
-        <div class="about-page">
+        <div >
           <h1>Welcome to Shop.io website!</h1>
           <p>
             We are a passionate team dedicated to bringing you the best online
