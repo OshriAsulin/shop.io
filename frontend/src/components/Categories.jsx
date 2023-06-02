@@ -4,7 +4,7 @@ import { getError } from '../utils'
 import { Nav } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import axios from 'axios'
-import '../styles/CategoriesStyles.css'
+// import '../styles/CategoriesStyles.css'
 import { NavLink } from 'react-router-dom'
 const Categories = () => {
   const [categories, setCategories] = useState([])

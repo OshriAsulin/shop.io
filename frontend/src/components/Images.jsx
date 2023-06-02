@@ -33,7 +33,7 @@ const images = [
     },
   ];
     return (
-    
+    // TODO: FIX THE SIZE OF THE IMAGES
         <ImageGallery autoPlay items={images} showIndex={false} showPlayButton={false} showNav={true} showThumbnails={false} showFullscreenButton={false}/>
         // <div><img src={img1} style={imgStyle} /></div>
         // <div><img src={img2} style={imgStyle} /></div>
