@@ -9,9 +9,10 @@ This Ecommerce application provides a seamless online shopping experience with c
 - [![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
 - [![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 - [![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
+
 - [![PayPal API](https://img.shields.io/badge/PayPal%20API-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://developer.paypal.com/)
 - [![Stripe API](https://img.shields.io/badge/Stripe%20API-008CDD?style=for-the-badge&logo=stripe&logoColor=white)](https://stripe.com/)
-- [![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
+<!-- - [![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/) -->
 
 
 <h2>🚀 Getting Started</h2>
