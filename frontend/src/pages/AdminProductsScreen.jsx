@@ -118,6 +118,7 @@ const AdminProductsScreen = () => {
   //   }
   // })
 
+  
 
   const deleteHandler = async (product) => {
     // console.log(product._id)
