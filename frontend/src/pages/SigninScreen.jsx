@@ -90,8 +90,8 @@ const SigninScreen = () => {
       </div>
       <div>
         <h3>Guest?</h3>
-        <p>email: admin@mail.com</p>
-        <p>password: admin</p>
+        <p>email: guest@mail.com</p>
+        <p>password: guest</p>
       </div>
     </Container>
   );
